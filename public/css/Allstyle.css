@@ -1,0 +1,14 @@
+body {
+    background-color: #CE9B6C;
+}
+
+
+#VolOrg,
+#Volunteer, 
+#RegOrg,
+#Organization { 
+    
+	color: #eaba36;
+	font-size: 170%;
+	 
+}
