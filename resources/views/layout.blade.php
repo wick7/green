@@ -39,7 +39,7 @@
                 <li><a class="navbar-brand" href="/">
                 <img src="/images/logo.png" width="125" height="25" class="img-responsive" alt="Responsive image">
             </a></li>
-                <li><a href="/calendar_events">Add an Event</a></li>
+                <li><a href="{{ url('/calendar_events/create') }}">Add an Event</a></li>
             </ul>
 
                 <!-- Right Side Of Navbar -->

@@ -8,7 +8,7 @@ class CalendarEvent extends Model implements Event
 {   
     
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['title', 'start', 'end', 'is_all_day', 'background_color'];
     
 
 

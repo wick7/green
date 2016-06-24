@@ -58,7 +58,7 @@ class CalendarEventController extends Controller
 
         
 
-        $calendar_event->save();
+        $request->user()->calendar()->save($calendar_event);
 
         return redirect()->route('calendar_events.index')->with('message', 'Item created successfully.');
     }
