@@ -43,45 +43,42 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="/images/logo.png" width="125" height="25" class="img-responsive" alt="Responsive image">
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if(Auth::guard('admin')->user())
+                    @if(Auth::guard('volunteer')->user())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
+                                {{ Auth::guard('volunteer')->user()->firstName }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/volunteer/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
-                    @elseif(Auth::guard('user')->user())
+                    @elseif(Auth::guard('organization')->user())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::guard('user')->user()->name }} <span class="caret"></span>
+                                {{ Auth::guard('organization')->user()->first_name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/organization/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @else
-                        <li><a id='Organization' href="{{ url('/login') }}">Organizations</a></li>
-                        <li><a id='Volunteer' href="{{ url('/admin/login') }}">Volunteers</a></li>
-                        <li><a id='RegOrg' href="{{ url('/register') }}">Register Organizations</a></li>
-                        <li><a id='VolOrg' href="{{ url('/admin/register') }}">Register Volunteers</a></li>
+                        <li><a id='Organization' href="{{ url('/organization/login') }}">Organizations</a></li>
+                        <li><a id='Volunteer' href="{{ url('/volunteer/login') }}">Volunteers</a></li>
+                        <li><a id='RegOrg' href="{{ url('/organization/register') }}">Register Organizations</a></li>
+                        <li><a id='RegVol' href="{{ url('/volunteer/register') }}">Register Volunteers</a></li>
                     @endif
                 </ul>
             </div>

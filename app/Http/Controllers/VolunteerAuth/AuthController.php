@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\AdminAuth;
+namespace App\Http\Controllers\VolunteerAuth;
 
-use App\Admin;
+use App\Volunteer;
 use Validator;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,8 +30,11 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
-    protected $guard = 'admin';
+    protected $redirectTo = '/volunteer/dashboard';
+    protected $guard = 'volunteer';
+    
+
+
     /**
      * Create a new authentication controller instance.
      *
@@ -40,18 +45,27 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+
+
+
     public function showLoginForm(){
 
-        if(view()->exists('auth.authenticate')){
-            return view('auth.authenticate');
+        if(view()->exists('volunteer.auth.authenticate')){
+            return view('volunteer.auth.authenticate');
         }
-        return view('admin.auth.login');
+        return view('volunteer.auth.login');
     }
     
     public function showRegistrationForm(){
 
-        return view('admin.auth.register');
+        return view('volunteer.auth.register');
     }
+
+
+
+
+
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -62,22 +76,25 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'firstName' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:volunteers',
             'password' => 'required|min:6|confirmed',
         ]);
     }
+
+
+
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return Volunteer
      */
     protected function create(array $data)
     {
-        return Admin::create([
-            'name' => $data['name'],
+        return Volunteer::create([
+            'firstName' => $data['firstName'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

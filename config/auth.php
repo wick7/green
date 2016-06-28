@@ -36,19 +36,15 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'organization' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'organizations'
         ],
-
-        'user' => [
+        'volunteer' => [
             'driver' => 'session',
-            'provider' => 'users'
+            'provider' => 'volunteers'
         ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins'
-        ],
+        
 
         'api' => [
             'driver' => 'token',
@@ -74,13 +70,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'volunteers' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Volunteer::class,
         ],
-        'admins' => [
+        'organizations' => [
             'driver' => 'eloquent',
-            'model' => App\Admin::class,
+            'model' => App\Organization::class,
         ]
         // 'users' => [
         //     'driver' => 'database',
@@ -108,15 +104,15 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'email' => 'auth.emails.password',
+        'volunteers' => [
+            'provider' => 'volunteer',
+            'email' => 'volunteer.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'admins' => [
-            'provider' => 'admins',
-            'email' => 'admin.auth.emails.password',
+        'organizations' => [
+            'provider' => 'organization',
+            'email' => 'organizationsauth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

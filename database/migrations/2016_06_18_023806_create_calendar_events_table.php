@@ -23,7 +23,7 @@ class CreateCalendarEventsTable extends Migration
             $table->boolean('is_all_day');
             $table->string('background_color')->nullable();
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,50 +17,66 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    //Home
+    Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
+
+    //Volunteer Registration Routes...
+    Route::get('/volunteer/register',  'VolunteerAuth\AuthController@showRegistrationForm');
+    Route::post('/volunteer/register', 'VolunteerAuth\AuthController@postRegister');
+
+    //Volunteer Login Routes...
+    Route::get('/volunteer/login', 'VolunteerAuth\AuthController@showLoginForm');
+    Route::post('/volunteer/login','VolunteerAuth\AuthController@login');
+
+    //Organization Registration Routes...
+    Route::get('/organization/register',  'OrganizationAuth\AuthController@showRegistrationForm');
+    Route::post('/organization/register', 'OrganizationAuth\AuthController@postRegister');
+
+    //Organization Login Routes...
+    Route::get('/organization/login', 'OrganizationAuth\AuthController@showLoginForm');
+    Route::post('/organization/login','OrganizationAuth\AuthController@login');
+
 
 /*
 |--------------------------------------------------------------------------
-| User Routes  
+| Volunteer Middlewear Routes 
 |--------------------------------------------------------------------------
 |
 */
+Route::group(['middleware' => ['volunteer']], function () {
+    
+    //Volunteer Logout Route...
+    Route::get('/volunteer/logout','VolunteerAuth\AuthController@logout');
 
-
-
-Route::group(['middleware' => ['web']], function(){
-	Route::auth();
-	Route::get('/home', 'HomeController@index');
+    //Volunteer Dashboard Routes...
+    //Route::get('/volunteer/dashboard', 'VolunteerController@getdashboard');
+    Route::get('/volunteer/dashboard', [
+        'uses' => 'VolunteerController@getdashboard',
+        'as' => 'volunteer.dashboard',
+    ]);
 });
 
-/*
-|--------------------------------------------------------------------------
-| Admin Routes 
-|--------------------------------------------------------------------------
-|
-*/
+Route::group(['middleware' => ['organization']], function () {
+    //Organization logout Route...
+    Route::get('/organization/logout','OrganizationAuth\AuthController@logout');
 
-Route::group(['middleware' => ['web']], function () {
-    //Login Routes...
-    Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
-    Route::post('/admin/login','AdminAuth\AuthController@login');
-    Route::get('/admin/logout','AdminAuth\AuthController@logout');
+    //Organization Dashboard Routes...
+    //Route::get('/organization/dashboard', 'OrganizationController@getdashboard');
+    Route::get('/organization/dashboard', [
+        'uses' => 'OrganizationController@getdashboard',
+        'as' => 'organization.dashboard',
+    ]);
 
-    // Registration Routes...
-    Route::get('admin/register', 'AdminAuth\AuthController@showRegistrationForm');
-    Route::post('admin/register', 'AdminAuth\AuthController@register');
-
-    Route::get('/admin', 'AdminController@index');
+        /*
+    |--------------------------------------------------------------------------
+    | Calender Routes  
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('calendar_events', 'CalendarEventController');
+    Route::get('/calendar', ['uses' => 'SampleController@calendar']);
 });
 
-/*
-|--------------------------------------------------------------------------
-| Calender Routes  
-|--------------------------------------------------------------------------
-|
-*/
 
-Route::resource('calendar_events', 'CalendarEventController');
-Route::get('/calendar', ['uses' => 'SampleController@calendar']);
+
+

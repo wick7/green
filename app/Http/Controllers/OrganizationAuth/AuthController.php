@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\OrganizationAuth;
 
-use App\User;
+use App\Organization;
 use Validator;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,7 +30,10 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/calendar';
+    protected $redirectTo = '/organization/dashboard';
+    protected $guard = 'organization';
+
+
 
     /**
      * Create a new authentication controller instance.
@@ -40,6 +45,22 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+
+
+    public function showLoginForm(){
+
+        if(view()->exists('organization.auth.authenticate')){
+            return view('organization.auth.authenticate');
+        }
+        return view('organization.auth.login');
+    }
+
+    
+    public function showRegistrationForm(){
+
+        return view('organization.auth.register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,8 +70,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'organization' => 'required|max:255',
+            'firstName' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:organizations',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -59,12 +81,13 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return Organization
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        return Organization::create([
+            'organization' => $data['organization'],
+            'firstName' => $data['firstName'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
