@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('navbar')
+<li><a href="{{ url('/calendar_events/create') }}">Add an Event</a></li>
+<li><a href="{{ route('calendar_events.index') }}">View Events</a></li>
+@endsection 
 @section('content')
 <div class="container">
     <div class="row">

@@ -23,7 +23,7 @@ class CalendarEventController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = Auth::guard('organization')->User();
 
         $calendar_events = CalendarEvent::all();
 

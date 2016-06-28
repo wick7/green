@@ -25,4 +25,8 @@ class Organization extends Model implements Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function User();
+    {
+        return $this->hasMany('App\CalendarEvent');
+    }
 }
