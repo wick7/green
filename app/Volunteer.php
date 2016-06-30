@@ -30,4 +30,9 @@ class Volunteer extends Model implements Authenticatable
     {
         return $this->hasMany('App\CalendarEvent');
     }
+
+    public function interests()
+    {
+        return $this->belongsToMany('App\Interest');
+    }
 }

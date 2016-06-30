@@ -47,7 +47,10 @@
 Route::group(['middleware' => ['volunteer']], function () {
     
     //Volunteer Logout Route...
-    Route::get('/volunteer/logout','VolunteerAuth\AuthController@logout');
+    Route::get('/volunteer/logout', [
+        'uses' => 'VolunteerAuth\AuthController@logout',
+        'as' => 'volunteer.logout',
+    ]);
 
     //Volunteer Dashboard Routes...
     //Route::get('/volunteer/dashboard', 'VolunteerController@getdashboard');
@@ -55,17 +58,35 @@ Route::group(['middleware' => ['volunteer']], function () {
         'uses' => 'VolunteerController@getdashboard',
         'as' => 'volunteer.dashboard',
     ]);
+
+    Route::get('/volunteer/account', [
+        'uses' => 'VolunteerController@getAccount',
+        'as' => 'volunteer.account.save',
+    ]);
+
+    Route::post('/volunteer/account', [
+        'uses' => 'VolunteerController@postAccount',
+        'as' => 'volunteer.account',
+    ]);
 });
 
 Route::group(['middleware' => ['organization']], function () {
     //Organization logout Route...
-    Route::get('/organization/logout','OrganizationAuth\AuthController@logout');
+    Route::get('/organization/logout', [
+        'uses' => 'OrganizationAuth\AuthController@logout',
+        'as' => 'organization.logout',
+    ]);
 
     //Organization Dashboard Routes...
     //Route::get('/organization/dashboard', 'OrganizationController@getdashboard');
     Route::get('/organization/dashboard', [
         'uses' => 'OrganizationController@getdashboard',
         'as' => 'organization.dashboard',
+    ]);
+
+    Route::get('/organization/account', [
+        'uses' => 'OrganizationController@getAccount',
+        'as' => 'organization.account',
     ]);
 
         /*
