@@ -6,6 +6,7 @@
 </head>
 
 
+
 <body id="app-layout">
     @include('includes.navBar')
 
