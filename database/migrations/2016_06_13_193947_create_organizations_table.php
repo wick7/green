@@ -19,6 +19,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->integer('zipCode');
+            $table->text('about');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

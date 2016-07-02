@@ -14,7 +14,7 @@ class Organization extends Model implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'organization', 'firstName', 'email', 'password',
+        'organization', 'firstName', 'email', 'password'
     ];
 
     /**
@@ -25,7 +25,8 @@ class Organization extends Model implements Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function User();
+
+    public function Calendar()
     {
         return $this->hasMany('App\CalendarEvent');
     }

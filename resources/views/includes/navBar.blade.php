@@ -32,7 +32,7 @@
                     @elseif(Auth::guard('organization')->user())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::guard('organization')->user()->first_name }} <span class="caret"></span>
+                                {{ Auth::guard('organization')->user()->organization }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu list-group">

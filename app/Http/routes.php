@@ -89,6 +89,11 @@ Route::group(['middleware' => ['organization']], function () {
         'as' => 'organization.account',
     ]);
 
+    Route::post('/organization/account', [
+        'uses' => 'OrganizationController@postAccount',
+        'as' => 'organization.account',
+    ]);
+
         /*
     |--------------------------------------------------------------------------
     | Calender Routes  

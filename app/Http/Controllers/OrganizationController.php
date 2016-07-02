@@ -21,9 +21,39 @@ class OrganizationController extends Controller
     public function getDashboard()
     {
         $user = Auth::guard('organization')->user();
-
-        //$userInterests = Auth::user()->interests()->get();
-
         return view('organization.dashboard')->with('user', $user);
+    }
+
+    public function getAccount ()
+    {
+        return view('/organization/account', [
+            'user' => Auth::guard('organization')->user(),
+        ]);
+    }
+
+    public function postAccount (Request $request)
+    {
+        $this->validate($request, [
+            'firstName' => 'required|max:120',
+            'lastName' => 'alpha|max:120',
+            'zipCode' => 'numeric|max:99999',
+            'about' => 'string|max:5000',
+        ]);
+        //User info
+        $user = Auth::guard('organization')->user();
+        $user->firstName = $request['firstName'];
+        $user->lastName = $request['lastName'];
+        $user->zipCode = $request['zipCode'];
+        $user->about = $request['about'];
+        $user->update();
+
+        //Picture
+        $file = $request->file('image');
+        $filename = $user->firstName . '-' . $user->id . '.jpg';
+        if ($file) {
+            Storage::disk('local')->put($filename, File::get($file));
+        }
+
+        return redirect()->route('organization.dashboard');
     }
 }

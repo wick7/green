@@ -1,20 +1,49 @@
 @extends('layouts.app')
-@section('navbar')
-<li><a href="{{ url('/calendar_events/create') }}">Add an Event</a></li>
-<li><a href="{{ route('calendar_events.index') }}">View Events</a></li>
-@endsection 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Organization Dashboard</div>
 
-                <div class="panel-body">
-                    Your Application's Landing Page.
+@section('title')
+    Dashboard
+@endsection
+
+@section('content')
+    <section class="row userDashboardPictureSection">
+        <div class="col-md-4 dashboard-creativeSpace">
+            <header><h3>Creative Space</h3></header>
+        </div>
+        <div class="col-md-4 dashboard-userImage">
+            <header><h3>
+                @if (Storage::disk('local')->has($user->firstName . '-' . $user->id . '.jpg'))
+                    <section class="row new-post">
+                        <div class="col-md-4 col-md-offset-2">
+                            <img class="img-circle img-responsive" width="300" height="300" src="{{ route('account.image', ['filename' => $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+                        </div>
+                    </section>
+                @else
+                    <section class="row new-post">
+                        <div class="col-md-4">
+                            <p>Image not found!</p>
+                        </div>
+                    </section>
+                @endif
+            </h3></header>
+                Organization: {{ $user->organization }} <br>
+                Name: {{ $user->firstName }} {{ $user->lastName }} <br>
+                Area: {{ $user->zipCode }}
+        </div>
+    </section>
+
+
+    <section class="row userDashboardInfoSection">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <header><h3>About Me</h3></header>
+                    <td class="text-left">
+                        {{ $user->about }}
+                    </td>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
 @endsection
+
