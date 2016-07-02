@@ -11,10 +11,10 @@
 		</div>
 		<div class="col-md-4 dashboard-userImage">
 			<header><h3>
-				@if (Storage::disk('local')->has($user->firstName . '-' . $user->id . '.jpg'))
+				@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
 			        <section class="row new-post">
 			            <div class="col-md-4 col-md-offset-2">
-			                <img class="img-circle img-responsive" width="300" height="300" src="{{ route('account.image', ['filename' => $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+			                <img class="img-circle img-responsive" width="300" height="300" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
 			            </div>
 			        </section>
 	    		@else
@@ -58,7 +58,9 @@
 					<header><h3>Interests</h3></header>
 					<td class="text-right">
 						<ul class="userDashboardInterests">
-
+							@foreach ($userInterests as $userInterest)
+								<li>{{ $userInterest->name }}</li <br>
+							@endforeach
 						</ul>
 					</td>
 				</div>

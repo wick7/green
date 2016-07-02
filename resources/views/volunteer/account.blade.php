@@ -59,10 +59,10 @@
             </form>
         </div>
     </section>
-    @if (Storage::disk('local')->has($user->firstName . '-' . $user->id . '.jpg'))
+    @if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
         <section class="row new-post">
             <div class="col-md-6 col-md-offset-3">
-                <img class="img-circle" width="200" height="150" src="{{ route('account.image', ['filename' => $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+                <img class="img-circle" width="200" height="150" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
             </div>
         </section>
     @endif

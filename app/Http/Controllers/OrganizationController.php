@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class OrganizationController extends Controller
 {
@@ -49,11 +51,18 @@ class OrganizationController extends Controller
 
         //Picture
         $file = $request->file('image');
-        $filename = $user->firstName . '-' . $user->id . '.jpg';
+        $filename = 'organization-' . $user->firstName . '-' . $user->id . '.jpg';
         if ($file) {
             Storage::disk('local')->put($filename, File::get($file));
         }
 
         return redirect()->route('organization.dashboard');
+    }
+
+    public function getUserImage($filename)
+    {
+        $file = Storage::disk('local')->get($filename);
+        //$file = Storage::get($filename);
+        return new Response($file, 200);
     }
 }

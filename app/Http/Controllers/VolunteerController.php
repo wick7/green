@@ -33,7 +33,11 @@ class VolunteerController extends Controller
     public function getDashboard()
     {
         $user = Auth::guard('volunteer')->user();
-        return view('/volunteer/dashboard')->with('user', $user);
+        $userInterests = Auth::guard('volunteer')->user()->interests()->get();
+        return view('/volunteer/dashboard', [
+            'user' => $user,
+            'userInterests' => $userInterests,
+        ]);
     }
 
     /**
@@ -77,7 +81,7 @@ class VolunteerController extends Controller
 
         //Picture
         $file = $request->file('image');
-        $filename = $user->firstName . '-' . $user->id . '.jpg';
+        $filename = 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg';
         if ($file) {
             Storage::disk('local')->put($filename, File::get($file));
         }

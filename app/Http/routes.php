@@ -68,6 +68,11 @@ Route::group(['middleware' => ['volunteer']], function () {
         'uses' => 'VolunteerController@postAccount',
         'as' => 'volunteer.account',
     ]);
+
+    Route::get('/volunteer/userImage/{filename}', [
+        'uses' => 'VolunteerController@getUserImage',
+        'as' => 'volunteer.account.image'
+    ]);
 });
 
 Route::group(['middleware' => ['organization']], function () {
@@ -92,6 +97,11 @@ Route::group(['middleware' => ['organization']], function () {
     Route::post('/organization/account', [
         'uses' => 'OrganizationController@postAccount',
         'as' => 'organization.account',
+    ]);
+
+    Route::get('/organization/userImage/{filename}', [
+        'uses' => 'OrganizationController@getUserImage',
+        'as' => 'organization.account.image'
     ]);
 
         /*
