@@ -8,10 +8,16 @@
 
 
 <body id="app-layout">
-    @include('includes.navBar')
+	
+	@include('includes.navBar')
+	
+	<div class="main-body container-fluid">
+	    @yield('content')
+    </div>
 
-    @yield('content')
-    
+	<div class="container"> 
+		@include('includes.footer')
+	</div>
 
     @yield('script')
 </body>

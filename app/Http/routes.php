@@ -37,7 +37,6 @@
     Route::get('/organization/login', 'OrganizationAuth\AuthController@showLoginForm');
     Route::post('/organization/login','OrganizationAuth\AuthController@login');
 
-
 /*
 |--------------------------------------------------------------------------
 | Volunteer Middlewear Routes 

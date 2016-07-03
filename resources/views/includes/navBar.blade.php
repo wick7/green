@@ -38,7 +38,7 @@
                             <ul class="dropdown-menu list-group">
                                 <li><a href="{{ route('organization.dashboard') }}">Dashboard</a></li>
                                 <li><a href="{{ route('organization.account') }}">Profile</a></li>
-                                <li><a href="#">Profile</a>My Events</li>
+                                <li><a href="#">My Events</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('organization.logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
