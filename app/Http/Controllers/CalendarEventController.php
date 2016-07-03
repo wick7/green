@@ -21,6 +21,7 @@ class CalendarEventController extends Controller
      *
      * @return Response
      */
+
     public function index()
     {
         $user = Auth::guard('organization')->User();

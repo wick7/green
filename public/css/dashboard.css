@@ -4,6 +4,22 @@
 	boarder-style:none;
 }
 
+.round {
+    border-color: #062f4f;
+    background: #EBEBEB;
+    border-style: solid;
+    border-width: 5px;
+
+    /* set border roundness */
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+.submit-btn {
+	margin-bottom: 5px;
+}
+
 .userDashboardPictureSection .circle {
 	margin-left: auto;
 	margin-right: auto;

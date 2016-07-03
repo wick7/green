@@ -11,9 +11,8 @@
         </div>
     </div>
 
-	    <section class="row new-post">
-        <div class="col-md-6 col-md-offset-3">
-            <header><h3>Your Account</h3></header>
+        <div class="col-md-6 col-md-offset-3 round">
+            <header><h3 style="text-align: center;">Your Account</h3></header>
             <form action="{{ route('volunteer.account.save') }}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
@@ -54,11 +53,12 @@
                         <input type="file" name="image" class="form-control" id="image">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save Account</button>
+                <button type="submit" class="btn btn-success btn-block submit-btn">Save Account</button>
                 <input type="hidden" value="{{ Session::token() }}" name="_token">
             </form>
         </div>
-    </section>
+    <br>
+    <br>
     @if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
         <section class="row new-post">
             <div class="col-md-6 col-md-offset-3">
