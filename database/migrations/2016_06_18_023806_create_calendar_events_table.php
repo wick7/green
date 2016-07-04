@@ -22,8 +22,8 @@ class CreateCalendarEventsTable extends Migration
             $table->dateTime('end');
             $table->boolean('is_all_day');
             $table->string('background_color')->nullable();
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('organizations')->onDelete('cascade');
+            $table->integer('organization_id')->unsigned()->index();
+            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();
         });
     }

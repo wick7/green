@@ -36,6 +36,9 @@
     //Organization Login Routes...
     Route::get('/organization/login', 'OrganizationAuth\AuthController@showLoginForm');
     Route::post('/organization/login','OrganizationAuth\AuthController@login');
+    Route::get('/calendar_events/show', 'CalendarEventController@show' );
+    Route::get('/calendar_events/index', 'CalendarEventController@index');
+        
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +114,8 @@ Route::group(['middleware' => ['organization']], function () {
     Route::resource('calendar_events', 'CalendarEventController');
     Route::get('/calendar', ['uses' => 'SampleController@calendar']);
 });
+
+
 
 
 

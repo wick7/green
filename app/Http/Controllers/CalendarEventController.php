@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CalendarEvent;
 
-use App\User;
+use App\Organization;
 
 use Illuminate\Http\Request;
 
@@ -49,6 +49,8 @@ class CalendarEventController extends Controller
      */
     public function store(Request $request)
     {
+        $org = Auth::guard('organization')->user();
+
         $calendar_event = new CalendarEvent();
 
         $calendar_event->title            = $request->input("title");
@@ -59,7 +61,7 @@ class CalendarEventController extends Controller
 
         
 
-        $request->user()->calendar()->save($calendar_event);
+       $org->calendar()->save($calendar_event);
 
         return redirect()->route('calendar_events.index')->with('message', 'Item created successfully.');
     }

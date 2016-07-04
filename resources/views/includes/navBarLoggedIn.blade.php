@@ -15,7 +15,7 @@
                     <ul class="dropdown-menu list-group">
                         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ route('account') }}">Profile</a></li>
-                        <li><a href="#">My Events</a></li>
+                        <li><a href="{{ route('calendar_events.index') }}">My Events</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     </ul>

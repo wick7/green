@@ -80,7 +80,7 @@ class CalendarEvent extends Model implements Event
      *
      * @return array
      */
-    public function User()
+     public function Organization()
     {
         return $this->belongsTo('App\Organization');
     }
