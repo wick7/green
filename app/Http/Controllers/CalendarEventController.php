@@ -14,7 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendarEventController extends Controller
 {
-   
+     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+   public function guestindex()
+    {
+        $user = Auth::guard('organization')->User();
+        $calendar_events = CalendarEvent::all();
+
+        return view('calendar_events.index', compact('calendar_events','user'));
+    }
 
     /**
      * Display a listing of the resource.

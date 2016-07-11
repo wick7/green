@@ -26,7 +26,7 @@ class Organization extends Model implements Authenticatable
         'password', 'remember_token',
     ];
 
-    public function Calendar()
+    public function calendar()
     {
         return $this->hasMany('App\CalendarEvent');
     }

@@ -16,7 +16,7 @@
     </div>
 
 	<div class="container"> 
-		@include('includes.footer')
+		<!--@include('includes.footer')-->
 	</div>
 
     @yield('script')

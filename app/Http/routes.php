@@ -36,8 +36,11 @@
     //Organization Login Routes...
     Route::get('/organization/login', 'OrganizationAuth\AuthController@showLoginForm');
     Route::post('/organization/login','OrganizationAuth\AuthController@login');
-    Route::get('/calendar_events/show', 'CalendarEventController@show' );
-    Route::get('/calendar_events/index', 'CalendarEventController@index');
+    Route::get('/calendarevents/show', ['as'=>'calendar_events.show', 
+                                             'uses'=>'CalendarEventController@show']);
+    Route::get('/calendarevents/index', ['as'=>'Calender.index',
+                                         'uses'=>'CalendarEventController@guestindex']
+    );
         
 
 /*

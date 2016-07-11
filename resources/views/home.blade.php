@@ -59,7 +59,7 @@
     </div>
 </div>
 
-<p> Check out our events here <a href="{{ url('/calendar_events/index') }}">Events!</a>
+<p> Check out our events here <a href="{{ Route ('Calender.index') }}">Events!</a></p>
 
 @extends ('includes.footer')
   
