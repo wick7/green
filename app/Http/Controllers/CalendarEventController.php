@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use DB;
+
 use Illuminate\Support\Facades\Auth;
 
 class CalendarEventController extends Controller
@@ -90,6 +92,22 @@ class CalendarEventController extends Controller
         return view('calendar_events.show', compact('calendar_event'));
     }
 
+    public function guestshow($id)
+    {
+        $calendar_event = CalendarEvent::findOrFail($id);
+        $volunteer = Auth::guard('volunteer')->user();
+
+        if ($volunteer)
+        {
+            $exists = DB::table('calendar_event_volunteer')
+            ->where('calendar_event_id', $id)
+            ->where('volunteer_id', $volunteer->id)
+            ->count() > 0;
+
+            return view('calendar_events.show', compact(['calendar_event', 'exists']));
+        }
+        else return view('calendar_events.show', compact('calendar_event'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

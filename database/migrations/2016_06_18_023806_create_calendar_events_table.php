@@ -26,6 +26,15 @@ class CreateCalendarEventsTable extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();
         });
+
+        Schema::create('calendar_event_volunteer', function (Blueprint $table) {
+            $table->integer('calendar_event_id')->unsigned()->index();
+            $table->foreign('calendar_event_id')->references('id')->on('calendar_events')->onDelete('cascade');
+            
+            $table->integer('volunteer_id')->unsigned()->index();
+            $table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
 
@@ -37,6 +46,7 @@ class CreateCalendarEventsTable extends Migration
     public function down()
     {
         Schema::drop('calendar_events');
+        Schema::drop('calendar_event_volunteer');
     }
 
 }

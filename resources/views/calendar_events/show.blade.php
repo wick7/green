@@ -41,6 +41,13 @@
             <a class="btn btn-default" href="{{ route('calendar_events.index') }}">Back</a>
             <a class="btn btn-warning" href="{{ route('calendar_events.edit', $calendar_event->id) }}">Edit</a>
             <form action="#/$calendar_event->id" method="DELETE" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };"><button class="btn btn-danger" type="submit">Delete</button></form>
+            @if(Auth::guard('volunteer')->user())
+                @if($exists)
+                    <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Unregister</a> 
+                @else
+                    <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Register</a>
+                @endif
+            @endif
         </div>
     </div>
 

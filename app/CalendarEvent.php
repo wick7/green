@@ -84,4 +84,9 @@ class CalendarEvent extends Model implements Event
     {
         return $this->belongsTo('App\Organization');
     }
+
+    public function volunteers()
+    {
+        return $this->belongsToMany('App\Volunteer');
+    }
 }

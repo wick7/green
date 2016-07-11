@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\User;
 use App\Interest;
+use App\CalendarEvent;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -95,5 +96,27 @@ class VolunteerController extends Controller
         $file = Storage::disk('local')->get($filename);
         //$file = Storage::get($filename);
         return new Response($file, 200);
+    }
+
+    /**
+     * Register for an event.
+     *
+     * @param  
+     * @return user
+     */
+    public function getEventRegister($id)
+    {
+        $volunteer = Auth::guard('volunteer')->user();
+        $exists = DB::table('calendar_event_volunteer')
+        ->where('calendar_event_id', $id)
+        ->where('volunteer_id', $volunteer->id)
+        ->count() > 0;
+
+        if ($exists)
+             $volunteer->calendar_events()->detach($id);
+        else
+            $volunteer->calendar_events()->attach($id);
+        
+        return redirect()->back()->with('exists', $exists);
     }
 }

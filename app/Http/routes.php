@@ -36,8 +36,8 @@
     //Organization Login Routes...
     Route::get('/organization/login', 'OrganizationAuth\AuthController@showLoginForm');
     Route::post('/organization/login','OrganizationAuth\AuthController@login');
-    Route::get('/calendarevents/show', ['as'=>'calendar_events.show', 
-                                             'uses'=>'CalendarEventController@show']);
+    Route::get('/calendarevents/show/{id}', ['as'=>'calendarevents.show', 
+                                             'uses'=>'CalendarEventController@guestshow']);
     Route::get('/calendarevents/index', ['as'=>'Calender.index',
                                          'uses'=>'CalendarEventController@guestindex']
     );
@@ -77,6 +77,11 @@ Route::group(['middleware' => ['volunteer']], function () {
     Route::get('/volunteer/userImage/{filename}', [
         'uses' => 'VolunteerController@getUserImage',
         'as' => 'volunteer.account.image'
+    ]);
+
+    Route::get('/calendarevents/register/{id}', [
+        'as'=>'calendar_events.register',
+        'uses'=>'VolunteerController@getEventRegister'
     ]);
 });
 
