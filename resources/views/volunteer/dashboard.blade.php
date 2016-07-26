@@ -35,7 +35,7 @@
 				<div class="circle circle-border">
 					<div class="circle-inner">
 						<div class="score-text">
-					    	Hours: {{ $user->trackedHours }}
+					    	Hours: {{  $total_hours }}
 					 	</div>
 					</div>
 				</div>

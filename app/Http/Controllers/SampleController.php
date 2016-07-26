@@ -42,5 +42,26 @@ class SampleController extends Controller
 
         return view('calendar', compact('calendar'));
     }
+    public function orgcalendar()
+    {
+        $staticEvent = \Calendar::event(
+            'Today\'s Sample',
+            true,
+            Carbon::today()->setTime(0, 0),
+            Carbon::today()->setTime(23, 59),
+            null,
+            [
+                'color' => '#0F0',
+                'url' => 'http://google.com',
+            ]
+        );
+
+        $databaseEvents = $this->calendarEvent->all();
+
+        $calendar = \Calendar::addEvent($staticEvent)->addEvents($databaseEvents);
+
+        return view('organization/dashboard', compact('calendar'));
+    }
+
 
 }

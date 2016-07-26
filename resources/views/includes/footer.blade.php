@@ -6,9 +6,9 @@
 
 		<div class="col-sm-8">
 			<ul>
-				<a href="#"><li>Facebook</li><a>
-				<a href="#"><li>Twitter</li><a>
-				<a href="#"><li>Instagram</li><a>
+				<a href="#"><li><i class="fa fa-facebook"></i>Facebook</li><a>
+				<a href="#"><li><i class="fa fa-twitter"></i>Twitter</li><a>
+				<a href="#"><li><i class="fa fa-instagram"></i>Instagram</li><a>
 			</ul>
 		</div>
 	</div>

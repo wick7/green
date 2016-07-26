@@ -1,0 +1,29 @@
+#userImage {
+  max-height: 540.5px;
+  max-width: 100%;
+  border:5px solid #E9BA32;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+
+   
+}
+#info{
+	text-align:center;
+	color:#E9BA32;
+	font-family: 'Oswald', sans-serif;
+	letter-spacing: 2px;
+	text-shadow: 1px 1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333, -1px -1px 0 #333;
+	font-size: 120%;
+
+}
+#toparea{
+	background-color: #184991;
+	margin-bottom: 0;
+	padding-bottom: 25px;
+}
+#bottomarea{
+	border-top: 5px solid black;
+	background-color: #E9BA32;
+}

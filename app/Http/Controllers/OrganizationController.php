@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\CalendarEvent;
+use App\volunteer;
+use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class OrganizationController extends Controller
 {
@@ -25,8 +28,36 @@ class OrganizationController extends Controller
 
     public function getDashboard()
     {
+        $staticEvent = \Calendar::event(
+            'Today\'s Sample',
+            true,
+            Carbon::today()->setTime(0, 0),
+            Carbon::today()->setTime(23, 59),
+            null,
+            [
+                'color' => '#0F0',
+                'url' => 'http://google.com',
+            ]
+        );
+
+
+        $calendar_events = CalendarEvent::all();
+
+        $calendar = \Calendar::addEvent($staticEvent)->addEvents($calendar_events);
+        
+        $Attending = DB::table('calendar_event_volunteer')->select('volunteer_id')->get();
+
+        $volunteers = DB::table('volunteers')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                      ->from('calendar_event_volunteer')
+                      ->whereRaw('calendar_event_volunteer.volunteer_id = id');
+            })
+            ->get();
+
         $user = Auth::guard('organization')->user();
-        return view('organization.dashboard')->with('user', $user);
+
+        return view('organization.dashboard', compact('user', 'volunteers','calendar_events', 'calendar'));
     }
 
     public function getAccount ()
