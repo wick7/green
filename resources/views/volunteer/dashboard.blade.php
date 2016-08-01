@@ -4,59 +4,81 @@
     Dashboard
 @endsection
 
+@section ('headsection')
+<link href="{{ URL::to('css/VolDash.css') }}" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.print.css" media="print"/>
+ <link href="{{ URL::to('css/Dropzone.css') }}" rel="stylesheet" />
+
+@endsection
 @section('content')
-	<section class="row userDashboardPictureSection">
-		<div class="col-md-4 dashboard-creativeSpace round">
-			<header><h3>Creative Space</h3></header>
-		</div>
-		<div class="col-md-4 dashboard-userImage round">
-			<header><h3>
-				@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
-			        <section class="row">
-			            <div class="col-md-4 col-md-offset-2">
-			                <img class="img-circle img-responsive" width="300" height="300" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
-			            </div>
-			        </section>
-	    		@else
-	    			<section class="row">
-			            <div class="col-md-4">
-			                <p>Image not found!</p>
-			            </div>
-			        </section>
-	    		@endif
-			</h3></header>
-				Name: {{ $user->firstName }} {{ $user->lastName }} <br>
-				Area: {{ $user->zipCode }}
-		</div>
-		<div class="col-md-1"> </div>
-		<div class="col-md-2 dashboard-trackedHours round">
-			<div class="row">
-				<header><h3>Hours tracked goes here</h3></header>
-				<div class="circle circle-border">
-					<div class="circle-inner">
-						<div class="score-text">
-					    	Hours: {{  $total_hours }}
-					 	</div>
-					</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 hours">
+			<h3>Your Total Hours!</h3>
+						
+					 <p>Hours: {{  $total_hours }}</p> 
+					 
 				</div>
-			</div>
-			<div class="row"><header><h3>Badges goes here</h3></header></div>
+		@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
+		<div class="col-md-8 infoSection">
+			            <div class="picture_info">
+			                <img id="userImage" class="img-circle img-responsive" width="300" height="300" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+			            </div>
+			            <div class="text_info">
+			            Name: {{ $user->firstName }} {{ $user->lastName }} <br>
+						Area: {{ $user->zipCode }}
+					</div>
+			            </div>
+			        
+	    		@else
+	    			
+			            <div class="col-md-8">
+			            	
+			                <p>Image not found!</p>
+			                Name: {{ $user->firstName }} {{ $user->lastName }} <br>
+							Area: {{ $user->zipCode }}
+			           
+			            </div>
+			        
+			    
+	    		@endif
+	    	</div>
 		</div>
-		<div class="col-md-1"> </div>
+	</div>
+	<div class="container">
+
+	<form class="dropzone" mehod="post" action="/{{$user->firstName}}/{{$user->id}}/photos">
+		<div class="dz-message" data-dz-message><span>Upload Photos from your event</span></div>
+		<input type="hidden" value="{{ Session::token() }}" name="_token">
+	</form>
+</div>
+
+	
+		<div class="container">
+		<div class="row"> 
+		
+			<div class="col-md-12"><h3>Badges goes here</h3></div>
+		</div>
+	</div>
 	</section>
+</div>
 
 
-	<section class="row userDashboardInfoSection">
+	
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-10">
 					<header><h3>About Me</h3></header>
-					<td class="text-left">
-						{{ $user->about }}
-					</td>
+					
+						<p>{{ $user->about }}</p>
+					
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-2">
 					<header><h3>Interests</h3></header>
 					<td class="text-right">
 						<ul class="userDashboardInterests">
@@ -68,7 +90,14 @@
 				</div>
 			</div>
 		</div>
-	</section>
-
+	
 @endsection
+@section('script')
+<script src="/js/Dropzone.js"></script>
+<script>
+	Dropzone.options.addPhotosForm = {
+		acceptedFiles:'.jpg, .jpeg, .png, .bmp', 
+	};
 
+</script>
+@endsection

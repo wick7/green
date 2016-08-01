@@ -1,0 +1,25 @@
+.text_info {
+	text-align: center;
+}
+.infoSection {
+	background-color: black;
+}
+.hours {
+	background-color: #184991;
+	color: #E9BA32;
+	font-family: 'Press Start 2P', cursive;
+}
+.row {
+	display: flex;
+}
+
+#userImage {
+ 
+  border:5px solid #E9BA32;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+
+   
+}

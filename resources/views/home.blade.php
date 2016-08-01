@@ -18,7 +18,9 @@
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -27,23 +29,31 @@
       <div class="item active">
         <img src="/images/Couch.png" alt="Chania" width="460" height="345">
         <div class="carousel-caption">
-          <h3>Chania</h3>
-          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+          <h3>Hanging out post event</h3>
+          <p>Hanging out after our voulunteering event</p>
         </div>
       </div>
 
       <div class="item">
         <img src="/images/outside.png" alt="Chania" width="460" height="345">
         <div class="carousel-caption">
-          <h3>Chania</h3>
-          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+          <h3>Volunteering</h3>
+          <p>Fundraising Table</p>
         </div>
       </div>
     
       <div class="item">
         <img src="/images/postcard.png" alt="Flower" width="460" height="345">
         <div class="carousel-caption">
-          <h3>Flowers</h3>
+          <h3>Lots Of Bikers showed up</h3>
+          <p>"Amount of money Raised From Event"</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="/images/signs.png" alt="Flower" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>We Had Blast Cheering them on!</h3>
           <p>Beatiful flowers in Kolymbari, Crete.</p>
         </div>
       </div>
@@ -51,8 +61,8 @@
       <div class="item">
         <img src="/images/signs.png" alt="Flower" width="460" height="345">
         <div class="carousel-caption">
-          <h3>Flowers</h3>
-          <p>Beatiful flowers in Kolymbari, Crete.</p>
+          <h3>They finnished at (time)</h3>
+          <p>It has started a traditon and we plan to do it agian in 2017!</p>
         </div>
       </div>
   

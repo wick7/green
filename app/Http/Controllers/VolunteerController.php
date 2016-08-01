@@ -129,4 +129,14 @@ class VolunteerController extends Controller
         
         return redirect()->back()->with('exists', $exists);
     }
+    public function addPhoto(Request $request){
+
+        $file = $request->file('file');
+
+        $name = time() . $file->getClientOriginalName();
+
+        $file->move('volunteers/photos', $name);
+
+        return 'working on it';
+    }
 }
