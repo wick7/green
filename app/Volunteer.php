@@ -25,6 +25,10 @@ class Volunteer extends Model implements Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+   public function posts()
+    {
+        return $this->morphMany('App\post', 'users_post');
+    }
 
     public function calendar()
     {

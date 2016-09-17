@@ -6,11 +6,17 @@ use App\CalendarEvent;
 
 use App\Organization;
 
+use App\post;
+
+use App\Volunteer;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 use DB;
+
+use Illuminate\Database\Eloquent\Relations;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -89,13 +95,29 @@ class CalendarEventController extends Controller
     {
         $calendar_event = CalendarEvent::findOrFail($id);
 
-        return view('calendar_events.show', compact('calendar_event'));
+        $post = post::all();
+
+        $Org = organization::all();
+
+        $Vol = Volunteer::all();
+
+        
+
+        
+
+        
+
+        return view('calendar_events.show', compact(['calendar_event', 'post','Org','Vol']));
     }
 
     public function guestshow($id)
     {
         $calendar_event = CalendarEvent::findOrFail($id);
+        $organization = Auth::guard('organization')->user();
         $volunteer = Auth::guard('volunteer')->user();
+        $post = $post = post::all();
+        $Org = organization::all();
+        $Vol = Volunteer::all();
 
         if ($volunteer)
         {
@@ -104,9 +126,9 @@ class CalendarEventController extends Controller
             ->where('volunteer_id', $volunteer->id)
             ->count() > 0;
 
-            return view('calendar_events.show', compact(['calendar_event', 'exists']));
+            return view('calendar_events.show', compact(['calendar_event', 'exists', 'post','Org','Vol', 'volunteer', 'organization']));
         }
-        else return view('calendar_events.show', compact('calendar_event'));
+        else return view('calendar_events.show',  compact(['calendar_event', 'post','Org','Vol','volunteer', 'organization']));
     }
     /**
      * Show the form for editing the specified resource.

@@ -13,6 +13,8 @@ class Organization extends Model implements Authenticatable
      *
      * @var array
      */
+protected $table ='organizations';
+
     protected $fillable = [
         'organization', 'firstName', 'email', 'password'
     ];
@@ -29,5 +31,9 @@ class Organization extends Model implements Authenticatable
     public function calendar()
     {
         return $this->hasMany('App\CalendarEvent');
+    }
+     public function posts()
+    {
+        return $this->morphMany('App\post', 'users_post');
     }
 }

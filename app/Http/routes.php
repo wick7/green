@@ -16,7 +16,7 @@
 |--------------------------------------------------------------------------
 |
 */
-
+Route::group(['middleware' => 'web'], function () {
     //Home
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
@@ -42,6 +42,9 @@
     Route::get('/calendarevents/index', ['as'=>'Calender.index',
                                          'uses'=>'CalendarEventController@guestindex']
     );
+    //post controller
+    Route::resource('post', 'postcontroller');
+    });
         
 
 /*
@@ -87,6 +90,15 @@ Route::group(['middleware' => ['volunteer']], function () {
     Route::post('/{name}/{id}/photos', [
         'uses'=>'VolunteerController@addPhoto'
         ]);
+    /*
+    |--------------------------------------------------------------------------
+    | Calender Routes  
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/calendarevents/register/{id}', [
+        'as'=>'calendar_events.register',
+        'uses'=>'VolunteerController@getEventRegister'
+    ]);
 });
 
 Route::group(['middleware' => ['organization']], function () {
