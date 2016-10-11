@@ -42,6 +42,6 @@ class Volunteer extends Model implements Authenticatable
 
     public function calendar_events()
     {
-        return $this->belongsToMany('App\CalendarEvent');
+        return $this->belongsToMany('App\CalendarEvent')->withPivot('hours_added');
     }
 }

@@ -26,6 +26,8 @@ class CreateInterestsTable extends Migration
             $table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');
             $table->timestamps();
         });
+
+        
     }
 
     /**
@@ -35,7 +37,7 @@ class CreateInterestsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('interests');
         Schema::drop('interest_volunteer');
+        Schema::drop('interests');
     }
 }

@@ -20,7 +20,7 @@
 		<div class="col-md-4 hours">
 			<h3>Your Total Hours!</h3>
 						
-					 <p>Hours: {{  $total_hours }}</p> 
+					 <p>Hours: {{  $user->trackedHours }}</p> 
 					 
 				</div>
 		@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))

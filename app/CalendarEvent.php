@@ -87,6 +87,6 @@ class CalendarEvent extends Model implements Event
 
     public function volunteers()
     {
-        return $this->belongsToMany('App\Volunteer');
+        return $this->belongsToMany('App\Volunteer')->withPivot('hours_added');
     }
 }

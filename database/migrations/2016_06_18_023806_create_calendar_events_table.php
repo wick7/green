@@ -34,6 +34,7 @@ class CreateCalendarEventsTable extends Migration
             $table->integer('volunteer_id')->unsigned()->index();
             $table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');
             $table->timestamps();
+            $table->binary('hours_added');
         });
     }
 
@@ -43,10 +44,12 @@ class CreateCalendarEventsTable extends Migration
      *
      * @return void
      */
+
+
     public function down()
     {
-        Schema::drop('calendar_events');
         Schema::drop('calendar_event_volunteer');
+        Schema::drop('calendar_events');
     }
 
 }
