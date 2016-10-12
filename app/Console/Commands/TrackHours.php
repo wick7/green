@@ -52,13 +52,10 @@ class TrackHours extends Command
         Log::info('The following events have completed today' . "\n");
         foreach ($events as $event)
         {
-            //Calculate duration of event.  This will be added to the users tracked hours
-            $datetime1 = strtotime($event->start);
-            $datetime2 = strtotime($event->end);
+            $start_time = $event->start;
+            $end_time = $event->end;
+            $interval = $end_time->diffInHours($start_time);
 
-            //calculate interval.  Interval is in seconds so divide by 3600 to get hours
-            $interval = ceil(($datetime2 - $datetime1) / 3600);
-            
 
             Log::info('The following events have completed today');
             foreach ($event->volunteers as $volunteer)

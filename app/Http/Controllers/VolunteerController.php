@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Log;
 use App\User;
 use App\Interest;
 use App\CalendarEvent;
@@ -117,18 +118,64 @@ class VolunteerController extends Controller
     public function getEventRegister($id)
     {
         $volunteer = Auth::guard('volunteer')->user();
+        
+        //Check if pivot entry exists for this user
         $exists = DB::table('calendar_event_volunteer')
         ->where('calendar_event_id', $id)
         ->where('volunteer_id', $volunteer->id)
         ->count() > 0;
 
+        //Capture start and end time of unregistered event
+        $unregistered_event = CalendarEvent::where('id', $id)->first();
+        $unregistered_start_time = $unregistered_event->start;
+        $unregistered_end_time = $unregistered_event->end;
+
+        $count = 0;
+
+        //Query user events to see if start/end time of unregistered event is within any other registrations
+        $volunteer_registered_events = $volunteer->calendar_events->all();
+        foreach($volunteer_registered_events as $event)
+        {
+            Log::info('registered event ID: [' . $event->id . ']');
+            Log::info('unregistered_event ID: [' . $unregistered_event->id . ']');
+            //Look if start time of event falls within another registered event
+            $start_event_in_progress = $unregistered_start_time->between($event->start, $event->end);
+            //Log::info('start_event_in_progress: [' . $start_event_in_progress . ']');
+            
+            //Look if end time of event falls within another registered event
+            $end_event_in_progress = $unregistered_start_time->between($event->start, $event->end);
+            //Log::info('end_event_in_progress: [' . $end_event_in_progress . ']');
+
+            Log::info('unregistered_start_time: [' . $unregistered_start_time . ']');
+            Log::info('unregistered_end_time: [' . $unregistered_end_time . ']');
+            Log::info('registered_start_time: [' . $event->start . ']');
+            Log::info('registered_start_time: [' . $event->end . ']');
+            
+            //There is a conflict in registeration time with a previous registered event
+            if ($start_event_in_progress || $end_event_in_progress)
+            {
+                Log::info('volunteer: [' . $volunteer->id . '] trying to register for an event: [' . $unregistered_event->id . ']. Already registered for event: [' . $event->id . ']');
+                $count += 1;
+            } 
+        }
+        Log::info("\n");
+
+        //Pivot table contains entry. unregisered user
         if ($exists)
              $volunteer->calendar_events()->detach($id);
+        
+        //Pivot table does not contain entry. regisered user
         else
-            $volunteer->calendar_events()->attach($id);
+        {
+            //user is not registered for any other event at this time
+            if ($count == 0)   
+                $volunteer->calendar_events()->attach($id);
+        }
         
         return redirect()->back()->with('exists', $exists);
     }
+
+
     public function addPhoto(Request $request){
 
         $file = $request->file('file');
