@@ -162,13 +162,13 @@ class VolunteerController extends Controller
             } 
         }
 
-        //Pivot table contains entry. unregisered user
+        //User is already registerd for this event. unregisered user
         if ($exists)
         {
             $volunteer->calendar_events()->detach($id);
             Log::info('volunteer: [' . $volunteer->id . '] unregistered for event: [' . $unregistered_event->id . ']' . "\n\n");
             
-            //Prevent weird errors
+            //num_registered_volunteers is unsigned.  This will prevent any weird errors
             if ($unregistered_event->num_registered_volunteers > 0)
             {
                 $unregistered_event->num_registered_volunteers -= 1;
@@ -181,8 +181,6 @@ class VolunteerController extends Controller
 
 
         //Event is already at capacity!
-        Log::info('Event capacity [' . $unregistered_event->max_volunteer . ']');
-        Log::info('Current number of volunteers [' . $unregistered_event->num_registered_volunteers . ']');
         if ($unregistered_event->num_registered_volunteers >= $unregistered_event->max_volunteer)
         {
             Log::info('unregistered event [' . $unregistered_event->id . '] is currently at capacity');
@@ -195,18 +193,19 @@ class VolunteerController extends Controller
         //Pivot table does not contain entry. regisered user
         else
         {
-            Log::info('count variable: [' . $count . ']');
             //user is not registered for any other event at this time
             if ($count == 0)  
             { 
                 $volunteer->calendar_events()->attach($id);
+                
                 //Update event with the new number of registered volunteers
                 $unregistered_event->num_registered_volunteers += 1;
                 $unregistered_event->update();
-                
+
                 Log::info('volunteer: [' . $volunteer->id . '] now registered for event: [' . $unregistered_event->id . ']' . "\n\n");
                 Session::flash('success', 'Successfully registered for event');
             }
+            //User is trying to register for events at the same time
             else
             {
                 Log::info('volunteer: [' . $volunteer->id . '] not allowed to register for event: [' . $unregistered_event->id . ']' . "\n\n");
@@ -214,8 +213,6 @@ class VolunteerController extends Controller
             }
             return redirect()->back();
         }
-        
-        
     }
 
 

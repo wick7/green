@@ -11,31 +11,27 @@
 
             <form action="#">
                 <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static">{{$calendar_event->id}}</p>
-                </div>
-                <div class="form-group">
-                     <label for="title">TITLE</label>
+                     <label for="title">Title of Event</label>
                      <p class="form-control-static">{{$calendar_event->title}}</p>
                 </div>
+                <div class="form-group">
+                     <label for="title">Description of Event</label>
+                     <p class="form-control-static" name="description" id="description" rows="5"> {{ $calendar_event->description }}</p>
+                </div>
                     <div class="form-group">
-                     <label for="start">START</label>
+                     <label for="start">Start Time of Event</label>
                      <p class="form-control-static">{{$calendar_event->start}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="end">END</label>
+                     <label for="end">End Time of Event</label>
                      <p class="form-control-static">{{$calendar_event->end}}</p>
                 </div>
-                    <div class="form-group">
-                     <label for="is_all_day">IS_ALL_DAY</label>
-                     <p class="form-control-static">{{$calendar_event->is_all_day}}</p>
                 </div>
                     <div class="form-group">
-                     <label for="background_color">BACKGROUND_COLOR</label>
-                     <p class="form-control-static">{{$calendar_event->background_color}}</p>
+                     <label for="remaining_spots">Remaing Spots for Registration</label>
+                     <p class="form-control-static">{{$calendar_event->max_volunteer - $calendar_event->num_registered_volunteers}}</p>
                 </div>
             </form>
-
 
             
             <a class="btn btn-default" href="{{ route('calendar_events.index') }}">Back</a>
@@ -47,12 +43,30 @@
                 @if($exists)
                     <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Unregister</a> 
                 @else
-                    <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Register</a>
+                    @if($calendar_event->max_volunteer - $calendar_event->num_registered_volunteers > 0)
+                        <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Register</a>
+                    @endif
                 @endif
             @endif
+            <hr>
         </div>
-
     </div>
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+
+    <h1>Registered Volunteers</h1>
+    <br>
+    @foreach($Vol as $person)
+      <p> {{ $person->firstName }} </p>
+    @endforeach
+    <hr>
+    </div>
+</div>
+
 
 <div class="row">
         <div class="col-md-12">

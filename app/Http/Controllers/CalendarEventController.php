@@ -97,12 +97,9 @@ class CalendarEventController extends Controller
     public function show($id)
     {
         $calendar_event = CalendarEvent::findOrFail($id);
-
         $post = post::all();
-
         $Org = organization::all();
-
-        $Vol = Volunteer::all();
+        $Vol = $calendar_event->volunteers;
 
         return view('calendar_events.show', compact(['calendar_event', 'post','Org','Vol']));
     }
@@ -114,7 +111,7 @@ class CalendarEventController extends Controller
         $volunteer = Auth::guard('volunteer')->user();
         $post = $post = post::all();
         $Org = organization::all();
-        $Vol = Volunteer::all();
+        $Vol = $calendar_event->volunteers;
 
         if ($volunteer)
         {
