@@ -64,6 +64,14 @@ class CalendarEventController extends Controller
     {
         $org = Auth::guard('organization')->user();
 
+        $this->validate($request, [
+            'title' => 'required|string|max:120',
+            'description' => 'string|max:500',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'max_volunteer' => 'required|integer',
+        ]);
+
         $calendar_event = new CalendarEvent();
 
         $calendar_event->title            = $request->input("title");
@@ -71,15 +79,7 @@ class CalendarEventController extends Controller
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
         $calendar_event->max_volunteer    = $request->input("max_volunteer");
-/*
-        $this->validate($request, [
-            'title' => 'required|alpha_num|max:120',
-            'description' => 'alpha_num|max:500',
-            'start' => 'required',
-            'end' => 'required',
-            'max_volunteer' => 'required|integer',
-        ]);
-*/
+
         
 
         $org->calendar()->save($calendar_event);
@@ -112,6 +112,8 @@ class CalendarEventController extends Controller
         $post = $post = post::all();
         $Org = organization::all();
         $Vol = $calendar_event->volunteers;
+
+
 
         if ($volunteer)
         {
@@ -146,6 +148,14 @@ class CalendarEventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'required|alpha_num|max:120',
+            'description' => 'alpha_num|max:500',
+            'start' => 'required|date',
+            'end' => 'required|date',
+            'max_volunteer' => 'required|integer',
+        ]);
+
         $calendar_event = CalendarEvent::findOrFail($id);
 
         $calendar_event->title            = $request->input("title");
