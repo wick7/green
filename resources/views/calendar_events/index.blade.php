@@ -55,6 +55,10 @@
             </table>
 
             <a class="btn btn-success" href="{{ route('calendar_events.create') }}">Create</a>
+
+            <div class="text-center">
+                {!! $calendar_events->links(); !!}
+            </div>
         </div>
     </div>
 @endsection

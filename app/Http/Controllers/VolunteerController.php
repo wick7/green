@@ -179,6 +179,17 @@ class VolunteerController extends Controller
             return redirect()->back();
         }
 
+        //Prevent user from registering for event in the past
+        if (\Carbon\Carbon::now() > $unregistered_start_time)
+        {
+            $volunteer->calendar_events()->detach($id);
+            Log::info('volunteer: [' . $volunteer->id . '] trying to register for event in teh past: [' . $unregistered_event->id . ']' . "\n\n");
+
+            Session::flash('warning', 'Cannot register for event in the past');
+            return redirect()->back();
+        }
+
+
 
         //Event is already at capacity!
         if ($unregistered_event->num_registered_volunteers >= $unregistered_event->max_volunteer)

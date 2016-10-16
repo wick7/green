@@ -44,7 +44,9 @@
                     <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Unregister</a> 
                 @else
                     @if($calendar_event->max_volunteer - $calendar_event->num_registered_volunteers > 0)
-                        <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Register</a>
+                        @if(\Carbon\Carbon::now() < $calendar_event->start)
+                          <a class="btn btn-primary" href="{{ route('calendar_events.register', $calendar_event->id) }}">Register</a>
+                        @endif
                     @endif
                 @endif
             @endif

@@ -23,29 +23,26 @@
 					 <p>Hours: {{  $user->trackedHours }}</p> 
 					 
 				</div>
-		@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
-		<div class="col-md-8 infoSection">
-			            <div class="picture_info">
-			                <img id="userImage" class="img-circle img-responsive" width="300" height="300" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
-			            </div>
-			            <div class="text_info">
-			            Name: {{ $user->firstName }} {{ $user->lastName }} <br>
-						Area: {{ $user->zipCode }}
-					</div>
-			            </div>
-			        
-	    		@else
-	    			
-			            <div class="col-md-8">
-			            	
-			                <p>Image not found!</p>
-			                Name: {{ $user->firstName }} {{ $user->lastName }} <br>
-							Area: {{ $user->zipCode }}
-			           
-			            </div>
-			        
-			    
-	    		@endif
+
+			@if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
+			<div class="col-md-8 infoSection">
+	            <div class="picture_info">
+	                <img id="userImage" class="img-circle img-responsive" width="300" height="300" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+	            </div>
+	            <div class="text_info">
+		            Name: {{ $user->firstName }} {{ $user->lastName }} <br>
+					Area: {{ $user->zipCode }}
+				</div>
+	        </div>
+				        
+			@else	
+	            <div class="col-md-8">
+	                <img src=" {{ "https://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email))) . "?s=100&d=retro" }}">
+	                Name: {{ $user->firstName }} {{ $user->lastName }} <br>
+					Area: {{ $user->zipCode }}
+	            </div>
+			@endif
+
 	    	</div>
 		</div>
 	</div>
