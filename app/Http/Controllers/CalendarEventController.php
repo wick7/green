@@ -24,7 +24,7 @@ class CalendarEventController extends Controller
    public function guestindex()
     {
         $user = Auth::guard('organization')->User();
-        $calendar_events = CalendarEvent::orderBy('id', 'desc')->paginate(10);
+        $calendar_events = CalendarEvent::where('start', '>', \Carbon\Carbon::now())->orderBy('id', 'desc')->paginate(10);
 
         return view('calendar_events.index', compact('calendar_events','user'));
     }
@@ -38,8 +38,7 @@ class CalendarEventController extends Controller
     public function index()
     {
         $user = Auth::guard('organization')->User();
-
-        $calendar_events = CalendarEvent::paginate(2);
+        $calendar_events = CalendarEvent::where('start', '>', \Carbon\Carbon::now())->orderBy('id', 'desc')->paginate(10);
 
         return view('calendar_events.index', compact('calendar_events','user'));
     }
