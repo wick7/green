@@ -21,7 +21,8 @@ class CreateCalendarEventsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->text('description');
-            $table->integer('max_volunteer');
+            $table->integer('max_volunteer')->unsigned();
+            $table->integer('num_registered_volunteers')->unsigned()->default(0);
             $table->integer('organization_id')->unsigned()->index();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();

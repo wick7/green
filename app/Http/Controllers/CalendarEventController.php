@@ -71,15 +71,15 @@ class CalendarEventController extends Controller
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
         $calendar_event->max_volunteer    = $request->input("max_volunteer");
-
+/*
         $this->validate($request, [
-            'title' => 'required|max:120',
-            'description' => 'alpha|max:500',
+            'title' => 'required|alpha_num|max:120',
+            'description' => 'alpha_num|max:500',
             'start' => 'required',
             'end' => 'required',
-            'max_volunteer' => 'integer',
+            'max_volunteer' => 'required|integer',
         ]);
-
+*/
         
 
         $org->calendar()->save($calendar_event);

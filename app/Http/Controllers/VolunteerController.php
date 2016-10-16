@@ -144,7 +144,7 @@ class VolunteerController extends Controller
         foreach($volunteer_registered_events as $registered_event)
         {
             Log::info('registered event ID: [' . $registered_event->id . ']');
-            Log::info('unregistered_event ID: [' . $unregistered_event->id . ']');
+            Log::info('unregistered event ID: [' . $unregistered_event->id . ']');
 
             $start_event_in_progress = $unregistered_start_time->between($registered_event->start, $registered_event->end);
             $end_event_in_progress = $unregistered_start_time->between($registered_event->start, $registered_event->end);
@@ -165,11 +165,32 @@ class VolunteerController extends Controller
         //Pivot table contains entry. unregisered user
         if ($exists)
         {
-             $volunteer->calendar_events()->detach($id);
-             Log::info('volunteer: [' . $volunteer->id . '] unregistered for event: [' . $unregistered_event->id . ']' . "\n\n");
-             Session::flash('success', 'Successfully unregistered for event');
-             return redirect()->back();
+            $volunteer->calendar_events()->detach($id);
+            Log::info('volunteer: [' . $volunteer->id . '] unregistered for event: [' . $unregistered_event->id . ']' . "\n\n");
+            
+            //Prevent weird errors
+            if ($unregistered_event->num_registered_volunteers > 0)
+            {
+                $unregistered_event->num_registered_volunteers -= 1;
+                $unregistered_event->update();
+            }
+
+            Session::flash('success', 'Successfully unregistered for event');
+            return redirect()->back();
         }
+
+
+        //Event is already at capacity!
+        Log::info('Event capacity [' . $unregistered_event->max_volunteer . ']');
+        Log::info('Current number of volunteers [' . $unregistered_event->num_registered_volunteers . ']');
+        if ($unregistered_event->num_registered_volunteers >= $unregistered_event->max_volunteer)
+        {
+            Log::info('unregistered event [' . $unregistered_event->id . '] is currently at capacity');
+            Session::flash('warning', 'Event is at capacity.  Cannot register.');
+            return redirect()->back();
+        }
+
+
         
         //Pivot table does not contain entry. regisered user
         else
@@ -179,6 +200,10 @@ class VolunteerController extends Controller
             if ($count == 0)  
             { 
                 $volunteer->calendar_events()->attach($id);
+                //Update event with the new number of registered volunteers
+                $unregistered_event->num_registered_volunteers += 1;
+                $unregistered_event->update();
+                
                 Log::info('volunteer: [' . $volunteer->id . '] now registered for event: [' . $unregistered_event->id . ']' . "\n\n");
                 Session::flash('success', 'Successfully registered for event');
             }
