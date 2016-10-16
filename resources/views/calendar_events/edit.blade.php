@@ -10,41 +10,34 @@
 
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3 round">
 
             <form action="{{ route('calendar_events.update', $calendar_event->id) }}" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static">{{$calendar_event->id}}</p>
-                </div>
-                <div class="form-group">
-                     <label for="title">TITLE</label>
+                     <label for="title">Title of Event</label>
                      <input type="text" name="title" class="form-control" value="{{$calendar_event->title}}"/>
                 </div>
+                <div class="form-group">
+                    <label for="description">Description of Event</label>
+                    <textarea class="form-control" name="description" id="description" rows="5"> {{ $calendar_event->description }}</textarea>
+                </div>
                     <div class="form-group">
-                     <label for="start">START</label>
+                     <label for="start">Start Time of Event</label>
                      <input id="datetimepicker" type="text" name="start" class="form-control" value="{{$calendar_event->start}}"/>
                 </div>
                     <div class="form-group">
-                     <label for="end">END</label>
+                     <label for="end">End Time of Event</label>
                      <input id="datetimepicker2" text" name="end" class="form-control" value="{{$calendar_event->end}}"/>
                 </div>
                     <div class="form-group">
-                     <label for="is_all_day">IS_ALL_DAY</label>
-                     <input type="text" name="is_all_day" class="form-control" value="{{$calendar_event->is_all_day}}"/>
-                </div>
-                    <div class="form-group">
-                     <label for="background_color">BACKGROUND_COLOR</label>
-                     <input type="text" name="background_color" class="form-control" value="{{$calendar_event->background_color}}"/>
-                </div>
+                     <label for="is_all_day">Max Number of volunteers for event</label>
+                     <input type="text" name="is_all_day" class="form-control" value="{{$calendar_event->max_volunteer}}"/>
 
-
-
-            <a class="btn btn-default" href="{{ route('calendar_events.index') }}">Back</a>
-            <button class="btn btn-primary" type="submit" >Save</button>
+            <br>
+            <button type="submit" class="btn btn-success btn-block submit-btn">Update Event</button>
             </form>
             <script>
             jQuery('#datetimepicker').datetimepicker();

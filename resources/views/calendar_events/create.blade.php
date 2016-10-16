@@ -7,36 +7,36 @@
 
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3 round">
 
             <form action="{{ route('calendar_events.store') }}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group">
-                     <label for="title">TITLE</label>
+                     <label for="title">Title of Event</label>
                      <input type="text" name="title" class="form-control" value=""/>
                 </div>
+                <div class="form-group">
+                    <label for="description">Description of Event</label>
+                    <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                </div>
                     <div class="form-group">
-                     <label for="start">START</label>
+                     <label for="start">Start Time of Event</label>
                      <input id="start" type="text" name="start" class="form-control" value=""/>
                 </div>
                     <div class="form-group">
-                     <label for="end">END</label>
+                     <label for="end">End Time of Event</label>
                      <input id="end" type="text" name="end" class="form-control" value=""/>
                 </div>
                     <div class="form-group">
-                     <label for="is_all_day">IS_ALL_DAY</label>
-                     <input type="text" name="is_all_day" class="form-control" value=""/>
-                </div>
-                    <div class="form-group">
-                     <label for="background_color">BACKGROUND_COLOR</label>
-                     <input type="text" name="background_color" class="form-control" value=""/>
-                </div>
+                     <label for="max_volunteer">Max Number of volunteers for event</label>
+                     <input type="text" name="max_volunteer" class="form-control" value=""/>
+                     <br>
 
 
 
-            <a class="btn btn-default" href="{{ route('calendar_events.index') }}">Back</a>
-            <button class="btn btn-primary" type="submit" >Create</button>
+
+            <button type="submit" class="btn btn-success btn-block submit-btn">Create Event</button>
             </form>
         </div>
     </div>

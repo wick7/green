@@ -12,6 +12,7 @@
 	@include('includes.navBar')
 	
 	<div class="main-body container-fluid">
+		@include('includes.messages')
 	    @yield('content')
     </div>
 

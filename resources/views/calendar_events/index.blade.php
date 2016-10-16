@@ -13,11 +13,10 @@
                     <tr>
                         <th>ORGANIZATION</th>
                         <th>TITLE</th>
+                        <th>DESCRIPTION</th>
                         <th>START</th>
                         <th>END</th>
-                        <th>IS_ALL_DAY</th>
-                        <th>BACKGROUND_COLOR</th>
-                        <th class="text-right">OPTIONS</th>
+                        <th>MAX # Of VOLUNTEERS</th>
                     </tr>
                 </thead>
 
@@ -27,10 +26,10 @@
                 <tr>
                     <td>{{$calendar_event->organization->organization}}</td>
                     <td>{{$calendar_event->title}}</td>
+                    <td>{{$calendar_event->description}}</td>
                     <td>{{$calendar_event->start}}</td>
                     <td>{{$calendar_event->end}}</td>
-                    <td>{{$calendar_event->is_all_day}}</td>
-                    <td>{{$calendar_event->background_color}}</td>
+                    <td>{{$calendar_event->max_volunteer}}</td>
  @if(Auth::guard('organization')->user())
                     <td class="text-right">
                         <a class="btn btn-primary" href="{{ route('calendar_events.show', $calendar_event->id) }}">View</a>

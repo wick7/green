@@ -3,21 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\CalendarEvent;
-
 use App\Organization;
-
 use App\post;
-
 use App\Volunteer;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use DB;
-
+use Log;
+use Session;
 use Illuminate\Database\Eloquent\Relations;
-
 use Illuminate\Support\Facades\Auth;
 
 class CalendarEventController extends Controller
@@ -73,15 +67,24 @@ class CalendarEventController extends Controller
         $calendar_event = new CalendarEvent();
 
         $calendar_event->title            = $request->input("title");
+        $calendar_event->description      = $request->input("description");
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
-        $calendar_event->is_all_day       = $request->input("is_all_day");
-        $calendar_event->background_color = $request->input("background_color");
+        $calendar_event->max_volunteer    = $request->input("max_volunteer");
+
+        $this->validate($request, [
+            'title' => 'required|max:120',
+            'description' => 'alpha|max:500',
+            'start' => 'required',
+            'end' => 'required',
+            'max_volunteer' => 'integer',
+        ]);
 
         
 
-       $org->calendar()->save($calendar_event);
+        $org->calendar()->save($calendar_event);
 
+        Session::flash('success', 'Successfully created an event!');
         return redirect()->route('calendar_events.index')->with('message', 'Item created successfully.');
     }
 
@@ -100,12 +103,6 @@ class CalendarEventController extends Controller
         $Org = organization::all();
 
         $Vol = Volunteer::all();
-
-        
-
-        
-
-        
 
         return view('calendar_events.show', compact(['calendar_event', 'post','Org','Vol']));
     }
@@ -155,10 +152,10 @@ class CalendarEventController extends Controller
         $calendar_event = CalendarEvent::findOrFail($id);
 
         $calendar_event->title            = $request->input("title");
+        $calendar_event->description      = $request->input("description");
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
-        $calendar_event->is_all_day       = $request->input("is_all_day");
-        $calendar_event->background_color = $request->input("background_color");
+        $calendar_event->max_volunteer    = $request->input("max_volunteer");
 
         $calendar_event->save();
 

@@ -20,8 +20,8 @@ class CreateCalendarEventsTable extends Migration
             $table->string('title');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->boolean('is_all_day');
-            $table->string('background_color')->nullable();
+            $table->text('description');
+            $table->integer('max_volunteer');
             $table->integer('organization_id')->unsigned()->index();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();

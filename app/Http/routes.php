@@ -53,7 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 |--------------------------------------------------------------------------
 |
 */
-Route::group(['middleware' => ['volunteer']], function () {
+Route::group(['middleware' => ['volunteer']], function ()
+{
     
     //Volunteer Logout Route...
     Route::get('/volunteer/logout', [
@@ -87,9 +88,10 @@ Route::group(['middleware' => ['volunteer']], function () {
         'as'=>'calendar_events.register',
         'uses'=>'VolunteerController@getEventRegister'
     ]);
+
     Route::post('/{name}/{id}/photos', [
         'uses'=>'VolunteerController@addPhoto'
-        ]);
+    ]);
     /*
     |--------------------------------------------------------------------------
     | Calender Routes  
@@ -101,6 +103,14 @@ Route::group(['middleware' => ['volunteer']], function () {
     ]);
 });
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Organization Middlewear Routes 
+|--------------------------------------------------------------------------
+|
+*/
 Route::group(['middleware' => ['organization']], function () {
     //Organization logout Route...
     Route::get('/organization/logout', [
