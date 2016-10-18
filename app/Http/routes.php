@@ -22,6 +22,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     //Volunteer Registration Routes...
+    Route::get('/admin/register',  'AdminAuth\AuthController@showRegistrationForm');
+    Route::post('/admin/register', 'AdminAuth\AuthController@postRegister');
+
+    //Volunteer Login Routes...
+    Route::get('/admin/login', 'AdminAuth\AuthController@showLoginForm');
+    Route::post('/admin/login','AdminAuth\AuthController@login');
+
+    //Volunteer Registration Routes...
     Route::get('/volunteer/register',  'VolunteerAuth\AuthController@showRegistrationForm');
     Route::post('/volunteer/register', 'VolunteerAuth\AuthController@postRegister');
 
@@ -148,6 +156,28 @@ Route::group(['middleware' => ['organization']], function () {
     Route::resource('calendar_events', 'CalendarEventController');
     Route::get('/calendar', ['uses' => 'SampleController@calendar']);
 
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin Middlewear Routes 
+|--------------------------------------------------------------------------
+|
+*/
+Route::group(['middleware' => ['admin']], function () {
+    //Organization logout Route...
+    Route::get('/admin/logout', [
+        'uses' => 'AdminAuth\AuthController@logout',
+        'as' => 'admin.logout',
+    ]);
+
+    //Organization Dashboard Routes...
+    //Route::get('/organization/dashboard', 'OrganizationController@getdashboard');
+    Route::get('/admin/dashboard', [
+        'uses' => 'AdminController@getdashboard',
+        'as' => 'admin.dashboard',
+    ]);
 });
 
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\CalendarEvent;
-use App\volunteer;
+use App\Volunteer;
 use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +18,11 @@ use Carbon\Carbon;
 class OrganizationController extends Controller
 {
     public function __construct(){
-    	$this->middleware('web');
+    	$this->middleware('organization');
     }
 
     public function index(){
-    	// return Auth::guard('admin')->user();
+    	// return Auth::guard('organization')->user();
     	return view('organization.dashboard');
     }
 

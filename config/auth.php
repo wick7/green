@@ -44,7 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'volunteers'
         ],
-        
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins'
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -77,6 +80,10 @@ return [
         'organizations' => [
             'driver' => 'eloquent',
             'model' => App\Organization::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
         ]
         // 'users' => [
         //     'driver' => 'database',
@@ -113,6 +120,12 @@ return [
         'organizations' => [
             'provider' => 'organization',
             'email' => 'organizationsauth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admin',
+            'email' => 'adminsauth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

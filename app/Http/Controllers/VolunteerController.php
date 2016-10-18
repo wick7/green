@@ -23,7 +23,7 @@ class VolunteerController extends Controller
     }
 
     public function index(){
-    	// return Auth::guard('admin')->user();
+    	// return Auth::guard('volunner')->user();
     	return view('volunteer.dashboard');
     }
 
