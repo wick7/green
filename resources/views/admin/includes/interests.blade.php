@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="well">
+        <div class="well" style="background-color:Gainsboro;">
             <table class="table table-hover table-condensed table-striped info">
                 <thead>
                     <tr>
@@ -31,16 +31,13 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-md-offset-3">
-            <form action="{{ route('admin.panel.interest.create') }}" method="POST">
+    <div class="col-md-6">
+            <form action="{{ route('admin.panel.interest.create') }}" method="POST" class="form-inline">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
             <div class="form-group">
-                 <label for="name">Name of Interest</label>
-                 <input type="text" name="name" class="form-control" value=""/>
+                <input type="text" name="name" class="form-control" value="" placeholder="Enter Interest"/>
             </div>
-
-        <button type="submit" class="btn btn-success btn-block submit-btn">Create Interest</button>
+            <button type="submit" class="btn btn-success">Create Interest</button>
         </form>
     </div>
 </div>

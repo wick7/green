@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="well">
+        <div class="well" style="background-color:Gainsboro;">
             <table class="table table-hover table-condensed table-striped info">
                 <thead>
                     <tr>
