@@ -1,17 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Organization;
-
 use App\Volunteer;
-
 use App\post;
-
 use Illuminate\Support\Facades\Auth;
 
 class postcontroller extends Controller

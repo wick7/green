@@ -178,6 +178,31 @@ Route::group(['middleware' => ['admin']], function () {
         'uses' => 'AdminController@getdashboard',
         'as' => 'admin.dashboard',
     ]);
+
+    Route::get('/admin/panel', [
+        'uses' => 'AdminController@getPanel',
+        'as' => 'admin.panel',
+    ]);
+
+    Route::delete('/admin/panel/v/{id}', [
+        'uses' => 'AdminController@destroyVolunteer',
+        'as' => 'admin.panel.volunteer.destroy',
+    ]);
+
+    Route::delete('/admin/panel/e/{id}', [
+        'uses' => 'AdminController@destroyEvent',
+        'as' => 'admin.panel.event.destroy',
+    ]);
+
+    Route::delete('/admin/panel/i/{id}', [
+        'uses' => 'AdminController@destroyInterest',
+        'as' => 'admin.panel.interest.destroy',
+    ]);
+
+    Route::post('/admin/panel/i/', [
+        'uses' => 'AdminController@createInterest',
+        'as' => 'admin.panel.interest.create',
+    ]);
 });
 
 

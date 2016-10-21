@@ -237,4 +237,16 @@ class VolunteerController extends Controller
 
         return 'working on it';
     }
+
+    public function destroy($id)
+    {
+        $volunteer_logged_in = Auth::guard('volunteer')->user();
+        $volunteer = Volunteer::findOrFail($id);
+        if ($volunteer_logged_in->id == $volunteer->id)
+        {
+            $volunteer->delete();
+            return redirect()->route('volunteer.dashboard')->with('message', 'User deleted successfully.');
+        }
+        return redirect()->back();
+    }
 }
