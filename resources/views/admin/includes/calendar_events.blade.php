@@ -12,8 +12,9 @@
                         <th>ORGANIZATION</th>
                         <th>TITLE</th>
                         <th>DESCRIPTION</th>
-                        <th>START</th>
-                        <th>END</th>
+                        <th>DATE</th>
+                        <th>START TIME</th>
+                        <th>END TIME</th>
                         <th>MAX # Of VOLUNTEERS</th>
                     </tr>
                 </thead>
@@ -26,8 +27,9 @@
                     <td>{{$calendar_event->organization->organization}}</td>
                     <td>{{$calendar_event->title}}</td>
                     <td>{{$calendar_event->description}}</td>
-                    <td>{{$calendar_event->start}}</td>
-                    <td>{{$calendar_event->end}}</td>
+                    <td>{{ date("d-m-Y",strtotime($calendar_event->start)) }}</td>
+                    <td>{{ date("g:i a",strtotime($calendar_event->start)) }}</td>
+                    <td>{{ date("g:i a",strtotime($calendar_event->end)) }}</td>
                     <td>{{$calendar_event->max_volunteer}}</td>
                     @if(Auth::guard('admin')->user())
                         <td class="text-right">

@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\CalendarEvent;
-use App\Organization;
 use App\Volunteer;
 use App\Interest;
 use Session;
 use Log;
+use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -36,7 +36,13 @@ class AdminController extends Controller
         $volunteers = Volunteer::orderBy('id', 'desc')->paginate(10);
         $interests = Interest::orderBy('id', 'desc')->paginate(10);
 
-        return view('/admin/panel', compact('user','calendar_events', 'volunteers', 'interests'));
+        Log::Info('calendar_events: [' . $calendar_events . ']');
+
+        return view('/admin/panel', [
+            'user' => $user,
+            'calendar_events' => $calendar_events,
+            'volunteers' => $volunteers,
+            'interests' => $interests]);
     }
 
     public function destroyVolunteer($id)
