@@ -6,6 +6,16 @@
             <h1>Interests</h1>
             @include('admin.includes.search')
         </div>
+
+        <div class="col-md-3 col-md-offset-1">
+            <form action="{{ route('admin.panel.interests.create') }}" method="POST" class="form-inline" style="margin-top: 70px;">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" value="" placeholder="Enter Interest"/>
+                </div>
+                <button type="submit" class="btn btn-success">Create Interest</button>
+            </form>
+        </div>
     </div>
 
 
@@ -38,17 +48,10 @@
             </tbody>
         </table>
     </div>
-    
     <div class="text-center">
         {!! $interests->links(); !!}
-        <form action="{{ route('admin.panel.interests.create') }}" method="POST" class="form-inline">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="form-group">
-                <input type="text" name="name" class="form-control" value="" placeholder="Enter Interest"/>
-            </div>
-            <button type="submit" class="btn btn-success">Create Interest</button>
-        </form>
     </div>
 </div>
+
 
 @endsection
