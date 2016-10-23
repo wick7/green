@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h1><center>Calendar Events</center></h1>
+    <div class="page-header row">
+        <div class="col-md-4 col-md-offset-4">
+            <h1>Calendar Events</h1>
+            @include('admin.includes.search')
+        </div>
     </div>
 
 <div class="row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Http\Requests;
 use App\CalendarEvent;
 use App\Organization;
@@ -29,13 +30,22 @@ class AdminController extends Controller
     }
 
 
-    public function getPanelInterests($id = 'id', $direction = 'desc')
+    public function getPanelInterests(Request $request, $id = 'id', $direction = 'desc')
     {
         //flip-flop $direction between 'asc' and 'desc'
         ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
 
         $user = Auth::guard('admin')->user();
-        $interests = Interest::orderBy($id, $direction)->paginate(10);
+        $interests = Interest::where(function($query) use ($request) {
+            if ($term = $request->term) {
+                $query->where('name', 'like', '%' . $term . '%');
+            }
+            else {
+                $interests = Interest::all();
+            }
+        })
+        ->orderBy($id, $direction)
+        ->paginate(10);
         
         return view('admin.includes.interests', [
             'user' => $user,
@@ -44,12 +54,24 @@ class AdminController extends Controller
     }
 
 
-    public function getPanelVolunteers($id = 'id', $direction = 'desc')
+    public function getPanelVolunteers(Request $request, $id = 'id', $direction = 'desc')
     {
         ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
         
         $user = Auth::guard('admin')->user();
-        $volunteers = Volunteer::orderBy($id, $direction)->paginate(10);
+        $volunteers = Volunteer::where(function($query) use ($request) {
+            if ($term = $request->term) {
+                $query->orWhere('email', 'like', '%' . $term . '%');
+                $query->orWhere('firstName', 'like', '%' . $term . '%');
+                $query->orWhere('lastName', 'like', '%' . $term . '%');
+                $query->orWhere('zipCode', 'like', '%' . $term . '%');
+            }
+            else {
+                $volunteers = Volunteer::all();
+            }
+        })
+        ->orderBy($id, $direction)
+        ->paginate(10);
         
         return view('admin.includes.volunteers', [
             'user' => $user,
@@ -58,12 +80,25 @@ class AdminController extends Controller
     }
 
 
-    public function getPanelOrganizations($id = 'id', $direction = 'asc')
+    public function getPanelOrganizations(Request $request, $id = 'id', $direction = 'asc')
     {
         ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
         
         $user = Auth::guard('admin')->user();
-        $organizations = Organization::orderBy($id, $direction)->paginate(10);
+        $organizations = Organization::where(function($query) use ($request) {
+            if ($term = $request->term) {
+                $query->orWhere('email', 'like', '%' . $term . '%');
+                $query->orWhere('organization', 'like', '%' . $term . '%');
+                $query->orWhere('firstName', 'like', '%' . $term . '%');
+                $query->orWhere('lastName', 'like', '%' . $term . '%');
+                $query->orWhere('zipCode', 'like', '%' . $term . '%');
+            }
+            else {
+                $organizations = Organization::all();
+            }
+        })
+        ->orderBy($id, $direction)
+        ->paginate(10);
         
         return view('admin.includes.organizations', [
             'user' => $user,
@@ -72,12 +107,24 @@ class AdminController extends Controller
     }
 
 
-    public function getPanelEvents($id = 'id', $direction = 'desc')
+    public function getPanelEvents(Request $request, $id = 'id', $direction = 'desc')
     {
         ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
 
         $user = Auth::guard('admin')->user();
-        $calendar_events = CalendarEvent::orderBy($id, $direction)->paginate(10);
+        $calendar_events = CalendarEvent::where(function($query) use ($request) {
+            if ($term = $request->term) {
+                $query->orWhere('title', 'like', '%' . $term . '%');
+                $query->orWhere('start', 'like', '%' . $term . '%');
+                $query->orWhere('end', 'like', '%' . $term . '%');
+                $query->orWhere('organization_id', 'like', '%' . $term . '%');
+            }
+            else {
+                $calendar_events = CalendarEvent::all();
+            }
+        })
+        ->orderBy($id, $direction)
+        ->paginate(10);
         
         return view('admin.includes.calendar_events', [
             'user' => $user,
