@@ -179,29 +179,54 @@ Route::group(['middleware' => ['admin']], function () {
         'as' => 'admin.dashboard',
     ]);
 
-    Route::get('/admin/panel', [
-        'uses' => 'AdminController@getPanel',
-        'as' => 'admin.panel',
+    Route::get('/admin/panel/volunteers/{id?}/{direction?}', [
+        'uses' => 'AdminController@getPanelVolunteers',
+        'as' => 'admin.panel.volunteers',
     ]);
 
-    Route::delete('/admin/panel/v/{id}', [
+    Route::get('/admin/panel/organizations/{id?}/{direction?}', [
+        'uses' => 'AdminController@getPanelOrganizations',
+        'as' => 'admin.panel.organizations',
+    ]);
+
+    Route::get('/admin/panel/events/{id?}/{direction?}', [
+        'uses' => 'AdminController@getPanelEvents',
+        'as' => 'admin.panel.events',
+    ]);
+
+    Route::get('/admin/panel/interests/{id?}/{direction?}', [
+        'uses' => 'AdminController@getPanelInterests',
+        'as' => 'admin.panel.interests',
+    ]);
+
+    Route::get('/admin/panel/categories/{id?}/{direction?}', [
+        'uses' => 'AdminController@getPanelCategories',
+        'as' => 'admin.panel.categories',
+    ]);
+
+    Route::delete('/admin/panel/volunteers/{id}', [
         'uses' => 'AdminController@destroyVolunteer',
-        'as' => 'admin.panel.volunteer.destroy',
+        'as' => 'admin.panel.volunteers.destroy',
     ]);
 
-    Route::delete('/admin/panel/e/{id}', [
+    Route::delete('/admin/panel/organizations/{id}', [
+        'uses' => 'AdminController@destroyOrganization',
+        'as' => 'admin.panel.organizations.destroy',
+    ]);
+
+    Route::delete('/admin/panel/events/{id}', [
         'uses' => 'AdminController@destroyEvent',
-        'as' => 'admin.panel.event.destroy',
+        'as' => 'admin.panel.events.destroy',
     ]);
 
-    Route::delete('/admin/panel/i/{id}', [
+    Route::delete('/admin/panel/interests/{id}', [
         'uses' => 'AdminController@destroyInterest',
-        'as' => 'admin.panel.interest.destroy',
+        'as' => 'admin.panel.interests.destroy',
     ]);
 
-    Route::post('/admin/panel/i/', [
+    Route::post('/admin/panel/interests/', [
         'uses' => 'AdminController@createInterest',
-        'as' => 'admin.panel.interest.create',
+        'as' => 'admin.panel.interests.create',
     ]);
 });
 

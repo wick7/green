@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\CalendarEvent;
+use App\Organization;
 use App\Volunteer;
 use App\Interest;
 use Session;
@@ -24,26 +25,66 @@ class AdminController extends Controller
     public function getDashboard()
     {
         $user = Auth::guard('admin')->user();
-
         return view('admin.dashboard');
     }
 
-    public function getPanel()
+
+    public function getPanelInterests($id = 'id', $direction = 'desc')
     {
+        //flip-flop $direction between 'asc' and 'desc'
+        ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
+
         $user = Auth::guard('admin')->user();
+        $interests = Interest::orderBy($id, $direction)->paginate(10);
+        
+        return view('admin.includes.interests', [
+            'user' => $user,
+            'interests' => $interests,
+            'direction' => $direction]);
+    }
 
-        $calendar_events = CalendarEvent::orderBy('id', 'desc')->paginate(10);
-        $volunteers = Volunteer::orderBy('id', 'desc')->paginate(10);
-        $interests = Interest::orderBy('id', 'desc')->paginate(10);
 
-        Log::Info('calendar_events: [' . $calendar_events . ']');
+    public function getPanelVolunteers($id = 'id', $direction = 'desc')
+    {
+        ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
+        
+        $user = Auth::guard('admin')->user();
+        $volunteers = Volunteer::orderBy($id, $direction)->paginate(10);
+        
+        return view('admin.includes.volunteers', [
+            'user' => $user,
+            'volunteers' => $volunteers,
+            'direction' => $direction]);
+    }
 
-        return view('/admin/panel', [
+
+    public function getPanelOrganizations($id = 'id', $direction = 'asc')
+    {
+        ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
+        
+        $user = Auth::guard('admin')->user();
+        $organizations = Organization::orderBy($id, $direction)->paginate(10);
+        
+        return view('admin.includes.organizations', [
+            'user' => $user,
+            'organizations' => $organizations,
+            'direction' => $direction]);
+    }
+
+
+    public function getPanelEvents($id = 'id', $direction = 'desc')
+    {
+        ($direction == 'desc') ? $direction = 'asc' : $direction = 'desc';
+
+        $user = Auth::guard('admin')->user();
+        $calendar_events = CalendarEvent::orderBy($id, $direction)->paginate(10);
+        
+        return view('admin.includes.calendar_events', [
             'user' => $user,
             'calendar_events' => $calendar_events,
-            'volunteers' => $volunteers,
-            'interests' => $interests]);
+            'direction' => $direction]);
     }
+
 
     public function destroyVolunteer($id)
     {
@@ -54,6 +95,17 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+
+    public function destroyOrganization($id)
+    {
+        $organization = Organization::findOrFail($id);
+        $organization->delete();
+
+        Session::flash('success', 'Successfully deleted organization');
+        return redirect()->back();
+    }
+
+
     public function destroyEvent($id)
     {
         $calendar_event = CalendarEvent::findOrFail($id);
@@ -63,6 +115,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+
     public function destroyInterest($id)
     {
         $interest = Interest::findOrFail($id);
@@ -71,6 +124,7 @@ class AdminController extends Controller
         Session::flash('success', 'Successfully deleted interest');
         return redirect()->back();
     }
+
 
     public function createInterest(Request $request)
     {

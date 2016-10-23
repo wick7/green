@@ -6,11 +6,14 @@
 
 @section('content')
 
-@include('admin.includes.volunteers')
-<hr>
-@include('admin.includes.calendar_events')
-<hr>
-@include('admin.includes.interests')
+<div class="row">
+
+
+		@include('admin.includes.interests')
+	</div>
+</div>
+
+
 @endsection
 
 
