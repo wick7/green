@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Commands\Inspire::class,
          Commands\TrackHours::class,
+         Commands\TrackLeaderBoard::class,
     ];
 
     /**
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('track:hours')->everyMinute(); 
+        $schedule->command('track:hours')->everyMinute();
+        $schedule->command('track:leader-board')->daily(); 
     }
 }

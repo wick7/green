@@ -10,6 +10,7 @@ use App\CalendarEvent;
 use App\Organization;
 use App\Volunteer;
 use App\Interest;
+use App\LeaderBoard;
 use Session;
 use Log;
 use DB;
@@ -179,12 +180,26 @@ class AdminController extends Controller
             'name' => 'required',
         ]);
 
-        $interest = new Interest;
-        $interest->name = $request->name;
-        Log::info('New Interest: [' . $interest->name . ']');
-        $interest->save();
+        //Query Table to see if interest already exists
+        $interest = Interest::where('name', $request->name)->first();
+        
+        //Create new entry
+        if (empty($interest)) {
+            $interest = \App\Interest::firstOrCreate(['name' => $request->name]);
+            Log::info('New Interest: [' . $request->name . ']');
+            Session::flash('success', 'Successfully created interest');
+        }
+        else Session::flash('warning', 'Interest already exists.  Not creating entry');
 
-        Session::flash('success', 'Successfully created interest');
         return redirect()->back();
+    }
+
+    public function test()
+    {
+        //Query table for available zip codes.  only grab the first instance of each zip code
+        $leaders = LeaderBoard::where('date', \Carbon\Carbon::today())->orderBy('trackedHours', 'desc')->get();
+    
+        return view('admin.includes.test', [
+            'leaders' => $leaders,]);
     }
 }

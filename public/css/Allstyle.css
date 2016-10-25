@@ -21,3 +21,39 @@ body {
 div.container {
 	margin-left: 0px;
 }
+
+.bird-box {
+	position: relative;
+	height: 600px;
+	background-image: url('https://raw.githubusercontent.com/DevTips/Parallax-on-the-Web-DevTips-/master/images/bird-bg.jpg');
+	background-size: contain;
+	background-position: top center;
+	background-attachment: fixed;
+	overflow: hidden;
+}
+
+.logo {
+	height: 100px;
+	width: 100%;
+	opacity:0.6;
+	position: absolute;
+	top:50%;
+	margin-top: -50px;
+	text-align: center;
+	line-height: 90px;
+	font-size: 500%;
+}
+
+.fore-bird {
+	height: 733;
+	width: 960px;
+	background-image: url('https://raw.githubusercontent.com/DevTips/Parallax-on-the-Web-DevTips-/master/images/fore-bird.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	top:400px;
+	left: 50%;
+	margin-top: -50px;
+}
+
+

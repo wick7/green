@@ -20,6 +20,7 @@ Route::group(['middleware' => 'web'], function () {
     //Home
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
+    Route::get('/test', 'HomeController@test');
 
     //Volunteer Registration Routes...
     Route::get('/admin/register',  'AdminAuth\AuthController@showRegistrationForm');
@@ -227,6 +228,11 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/admin/panel/interests/', [
         'uses' => 'AdminController@createInterest',
         'as' => 'admin.panel.interests.create',
+    ]);
+
+    Route::get('/admin/panel/test/', [
+        'uses' => 'AdminController@test',
+        'as' => 'admin.panel.interests.test',
     ]);
 });
 
