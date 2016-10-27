@@ -10,6 +10,15 @@
 	    <br>
     @endforeach
 
+
+    @foreach($volunteers as $volunteer)
+	    {{ $volunteer->firstName }}
+	    has
+	    {{ $volunteer->trackedHours }}
+	    hours tracked
+	    <br>
+    @endforeach
+
     <br><br>
 
  @endsection

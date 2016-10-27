@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="page-header">
@@ -59,6 +59,4 @@
         <a class="btn btn-success" href="{{ route('calendar_events.create') }}">Create</a>
     </div>
 </div>
-
-
 @endsection

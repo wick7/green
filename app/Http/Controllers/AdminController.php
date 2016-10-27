@@ -197,9 +197,12 @@ class AdminController extends Controller
     public function test()
     {
         //Query table for available zip codes.  only grab the top 3 leaders
-        $leaders = LeaderBoard::where('date', \Carbon\Carbon::today())->orderBy('trackedHours', 'desc')->paginate(3);
+        $leaders = LeaderBoard::where('date', \Carbon\Carbon::today())->orderBy('trackedHours', 'desc')->paginate(10);
+
+        $volunteers = Volunteer::orderBy('trackedHours', 'desc')->paginate(3);
     
         return view('admin.includes.test', [
-            'leaders' => $leaders,]);
+            'leaders' => $leaders,
+            'volunteers' => $volunteers]);
     }
 }

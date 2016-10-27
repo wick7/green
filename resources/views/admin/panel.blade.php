@@ -7,12 +7,8 @@
 @section('content')
 
 <div class="row">
-
-
-		@include('admin.includes.interests')
-	</div>
+	@include('admin.includes.interests')
 </div>
-
 
 @endsection
 

@@ -1,136 +1,123 @@
 @extends('layouts.app')
-@section ('headsection')
-<link rel="stylesheet" href="/css/Homestyle.css">
- <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 70%;
-      margin: auto;
-  }
-  </style>
-@endsection 
+
+@section('title')
+    home Page
+@endsection
+
+@section('head')
+    <!-- CSS -->
+    <link href="{{ URL::to('css/scrolling-nav.css') }}" rel="stylesheet" type="text/css" >
+@endsection
+
 @section('content')
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section">
+        <div class="intro_container">
+            <div class="intro_row">
+                <div class="intro_col-lg-12">
+                    <h1>Carrot Path</h1>
+                    <h3> Whether you're a Voluenteer, Organizer or Local Buisness</h3>
+                    <h3>Carrot Path has a route for you!</h3>
+                    <a class="btn btn-default page-scroll" href="#about"></a>
+                    <h4>Follow the Path to Learn More</h4>
+<!--                     <img class= "logo" src="node_modules/bootstrap-sass/assets/images/down.png"></img>
+ -->                   <video poster="long.jpg" autoplay="true" loop> 
+                        <source src="https://s3.amazonaws.com/distill-videos/videos/processed/34/BetweenTwoTrees-HD.mp4.webm" type="video/webm">
+                        <source src="https://s3.amazonaws.com/distill-videos/videos/processed/34/BetweenTwoTrees-HD.mp4-mobile.mp4" type="video/mp4">
 
-<div class="container carosel-fix">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-      <li data-target="#myCarousel" data-slide-to="5"></li>
-      <li data-target="#myCarousel" data-slide-to="6"></li>
-    </ol>
+                   </video>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-
-      <div class="item active">
-        <img src="/images/Couch.png" alt="Chania" width="460" height="345">
-        <div class="carousel-caption">
-          <h3>Hanging out post event</h3>
-          <p>Hanging out after our voulunteering event</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="/images/outside.png" alt="Chania" width="460" height="345">
-        <div class="carousel-caption">
-          <h3>Volunteering</h3>
-          <p>Fundraising Table</p>
-        </div>
-      </div>
-    
-      <div class="item">
-        <img src="/images/postcard.png" alt="Flower" width="460" height="345">
-        <div class="carousel-caption">
-          <h3>Lots Of Bikers showed up</h3>
-          <p>"Amount of money Raised From Event"</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="/images/signs.png" alt="Flower" width="460" height="345">
-        <div class="carousel-caption">
-          <h3>We Had Blast Cheering them on!</h3>
-          <p>Beatiful flowers in Kolymbari, Crete.</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="/images/signs.png" alt="Flower" width="460" height="345">
-        <div class="carousel-caption">
-          <h3>They finnished at (time)</h3>
-          <p>It has started a traditon and we plan to do it agian in 2017!</p>
-        </div>
-      </div>
-  
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div id= "box1"class="well box transform">
-                <h3>Volunteer<h3>
-                <p id="volunteer1">Click to find why you should join?</p>
-                <ul class="reasons" id="volunteer2">
-                    <li>reason 1</li>
-                    <li>reason 2</li>
-                    <li>reason 3</li>
-                    <li><a href="#">Join us today!</a></li>
-                </ul>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="col-md-4">
-            <div id= "box2" class="well box transform">
-                <h3>Non Profit Organization</h3>
-                <p id="organization1">Click to find why you should join?</p>
-                <ul class="reasons" id="organization2">
-                    <li>reason 1</li>
-                    <li>reason 2</li>
-                    <li>reason 3</li>
-                    <li>Click to Join us today!</li>
-                </ul>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <!-- <img src="/images/vol_pic.jpg" alt="picture"/> -->
+        <div class="about_container">
+            <div class="row">
+                <div class="about_col-lg-12">
+                    <h1>What We're All About</h1>
+                    <h4>We're a platform that connects organizations, voluneteers and local buisnesses to fulfill worthy causes within the community.</h4>
+                    <a class="btn btn-default page-scroll about_btn" href="#services"></a>
+                    <div class="present">
+                         <div>
+                             <ul>
+                                <h5>Volunteers</h5>
+                                 <li>Reason 1</li>
+                                 <li>Reason 2</li>
+                                 <li>Reason 3</li>
+                                 <li>Click Here to Learn More</li>
+                             </ul>
+                         </div>
+                         <span style="margin-left: 15em;"></span>
+                         <div style="margin-left: 15em;">       
+                             <ul>
+                                <h5>Organizations</h5>
+                                 <li>Reason 1</li>
+                                 <li>Reason 2</li>
+                                 <li>Reason 3</li>
+                                 <li>Click Here to Learn More</li>
+                             </ul>
+                         </div>
+                         <span style="margin-left: 13em;"></span>
+                         <div class="present_bus" style="margin-left: 15em;">
+                            <ul>
+                                <h5>Businesses</h5>
+                                 <li>Reason 1</li>
+                                 <li>Reason 2</li>
+                                 <li>Reason 3</li>
+                                 <li>Click Here to Learn More</li>
+                             </ul>
+                         </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="col-md-4">
-            <div id= "box3" class="well box transform">
-                <h2>Merchant<h2>
-                <p id="merchant1">Click to find why you should join?</p>
-                <ul class="reasons" id="merchant2">
-                    <li>reason 1</li>
-                    <li>reason 2</li>
-                    <li>reason 3</li>
-                    <li>Join us today!</li>
-                </ul>
-            </div> 
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Leader Boards</h1>
+                    <a class="btn btn-default page-scroll" href="#contact"></a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Your Area</h1>
+                    <a class="btn btn-default page-scroll" href="#contacttwo"></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-<p> Check out our events here <a href="{{ Route ('Calender.index') }}">Events!</a></p>
-
-
-  
+    <section id="contacttwo" class="contacttwo-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>More Info</h1>
+                    <a class="btn btn-default page-scroll" href="#intro"></a>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
+
+
+
 @section('script')
-<script src="/js/fliptiles.js"></script>
-<script src="/js/carousel.js"></script>
-
+    <!-- Scrolling Nav JavaScript -->
+    <script src="{{ URL::to('js/jquery.easing.min.js') }}"></script>
+    <script src="{{ URL::to('js/scrolling-nav.js') }}"></script>
 @endsection
+                    

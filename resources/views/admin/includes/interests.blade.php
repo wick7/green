@@ -52,6 +52,4 @@
         {!! $interests->links(); !!}
     </div>
 </div>
-
-
 @endsection

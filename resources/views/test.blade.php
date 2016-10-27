@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-<!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/allstyle.css">
-
 @section('title')
     test
 @endsection

@@ -1,6 +1,4 @@
-@extends('layout')
-
-
+@extends('layouts.app')
 
 
 @section('content')
@@ -36,14 +34,13 @@
                      <label for="is_all_day">Max Number of volunteers for event</label>
                      <input type="text" name="is_all_day" class="form-control" value="{{$calendar_event->max_volunteer}}"/>
 
-            <br>
-            <button type="submit" class="btn btn-success btn-block submit-btn">Update Event</button>
+                <br>
+                <button type="submit" class="btn btn-success btn-block submit-btn">Update Event</button>
             </form>
-            <script>
-            jQuery('#datetimepicker').datetimepicker();
-            </script>
         </div>
     </div>
+@endsection
 
-
+@section('script')
+    <script>jQuery('#datetimepicker').datetimepicker();</script>
 @endsection

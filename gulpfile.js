@@ -12,5 +12,9 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
+    mix.sass('app.scss'),
+    mix.styles([
+        'scrolling-nav.css',
+    ], 'resources/assets/css');
+
 });

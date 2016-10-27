@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="page-header">
@@ -41,22 +41,16 @@
                      <label for="max_volunteer">Max Number of volunteers for event</label>
                      <input type="text" name="max_volunteer" class="form-control" value=""/>
                      <br>
-
-
-
-
-            <button type="submit" class="btn btn-success btn-block submit-btn">Create Event</button>
+                <button type="submit" class="btn btn-success btn-block submit-btn">Create Event</button>
             </form>
         </div>
     </div>
 
-@section('scripts')
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.js"></script>
-<script src="/js/bootstrap-datetimepicker.js"></script>
-<script src="/js/javas.js"></script>
+@section('script')
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.js"></script>
 
-@stop 
-
+    <script src="{{ URL::to('js/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ URL::to('js/javas.js') }}"></script>
 @endsection
