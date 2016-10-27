@@ -48,7 +48,7 @@ class trackLeaderBoard extends Command
         foreach($volunteers as $volunteer) {
             //Calculate tracked hour for each zip code
             $trackedHours = Volunteer::where('zipCode', $volunteer->zipCode)->sum('trackedHours');
-            Log::info('Zip Code: [' . $volunteer->zipCode . '] Tracked Hours [' . $trackedHours . ']');
+            Log::info('Zip Code: [' . $volunteer->zipCode . '] Total Tracked Hours [' . $trackedHours . ']');
             
             $leaderBoard = new LeaderBoard();
             $leaderBoard->date = \Carbon\Carbon::today();

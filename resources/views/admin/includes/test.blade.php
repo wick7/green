@@ -6,7 +6,7 @@
 	    {{ $leader->zipCode }}
 	    has
 	    {{ $leader->trackedHours }}
-	    tracked
+	    hours tracked
 	    <br>
     @endforeach
 

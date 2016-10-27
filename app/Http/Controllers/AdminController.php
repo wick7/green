@@ -196,8 +196,8 @@ class AdminController extends Controller
 
     public function test()
     {
-        //Query table for available zip codes.  only grab the first instance of each zip code
-        $leaders = LeaderBoard::where('date', \Carbon\Carbon::today())->orderBy('trackedHours', 'desc')->get();
+        //Query table for available zip codes.  only grab the top 3 leaders
+        $leaders = LeaderBoard::where('date', \Carbon\Carbon::today())->orderBy('trackedHours', 'desc')->paginate(3);
     
         return view('admin.includes.test', [
             'leaders' => $leaders,]);
