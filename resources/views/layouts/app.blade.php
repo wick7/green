@@ -18,6 +18,7 @@
 	    @yield('head')
 	</head>
 
+
 	<body id="app-layout">
 		<div class="main-body">
 			@include('includes.messages')

@@ -6,11 +6,6 @@
 
 @section('content')
 	<div class="row">
-        <div class="col-md-offset-4">
-            @include('includes.errors')
-        </div>
-    </div>
-
         <div class="col-md-6 col-md-offset-3 round">
             <header><h3 style="text-align: center;">Your Account</h3></header>
             <form action="{{ route('volunteer.account.save') }}" method="post" enctype="multipart/form-data">
@@ -57,13 +52,14 @@
                 <input type="hidden" value="{{ Session::token() }}" name="_token">
             </form>
         </div>
-    <br>
-    <br>
-    @if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
-        <section class="row new-post">
-            <div class="col-md-6 col-md-offset-3">
-                <img class="img-circle" width="200" height="150" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
-            </div>
-        </section>
-    @endif
+        <br>
+        <br>
+        @if (Storage::disk('local')->has('volunteer-' . $user->firstName . '-' . $user->id . '.jpg'))
+            <section class="row new-post">
+                <div class="col-md-6 col-md-offset-3">
+                    <img class="img-circle" width="200" height="150" src="{{ route('volunteer.account.image', ['filename' => 'volunteer-' . $user->firstName . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+                </div>
+            </section>
+        @endif
+    </div>
 @endsection

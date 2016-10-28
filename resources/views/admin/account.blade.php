@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Account
+    Admin Account
 @endsection
 
 @section('content')

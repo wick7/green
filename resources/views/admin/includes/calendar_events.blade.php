@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Admin Panel
+@endsection
+
 @section('content')
     <div class="page-header row">
         <div class="col-md-4 col-md-offset-4">

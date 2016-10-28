@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title')
-    Panel
+    Admin Panel
 @endsection
 
 @section('content')
 
-<div class="row">
-	@include('admin.includes.interests')
-</div>
+	<div class="row">
+		@include('admin.includes.interests')
+	</div>
 
 @endsection
 

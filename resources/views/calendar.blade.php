@@ -4,6 +4,6 @@
     {!! $calendar->calendar() !!}
 @stop
 
-@section('scripts')
+@section('script')
     {!! $calendar->script() !!}
 @stop
