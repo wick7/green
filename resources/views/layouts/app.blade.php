@@ -13,8 +13,8 @@
 	    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
 	    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Heebo:100" rel="stylesheet">
 
-	    <!-- CSS -->
-	    <link href="{{ URL::to('css/bootstrap.css') }}" rel="stylesheet" type="text/css" >
+	    <!-- CSS 3.3.7-->
+	    <link href="{{ URL::to('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css" >
 	    @yield('head')
 	</head>
 
@@ -25,7 +25,9 @@
 		    @yield('content')
 	    </div>
 
-		<script src="{{ URL::to('js/jquery.min.js') }}"></script>
+
+		<script src="{{ URL::to('assets/jquery-3.1.1.min.js') }}"></script>
+		<script src="{{ URL::to('assets/js/bootstrap.js') }}"></script>
 		 @yield('script')
 	</body>
 </html>
