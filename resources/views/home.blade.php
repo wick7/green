@@ -20,13 +20,10 @@
                     <h3>Carrot Path has a route for you!</h3>
                     <a class="btn btn-default page-scroll" href="#about"></a>
                     <h4>Follow the Path to Learn More</h4>
-<!--                     <img class= "logo" src="node_modules/bootstrap-sass/assets/images/down.png"></img>
- -->                   <video poster="long.jpg" autoplay="true" loop> 
+                    <video poster="long.jpg" autoplay="true" loop> 
                         <source src="https://s3.amazonaws.com/distill-videos/videos/processed/34/BetweenTwoTrees-HD.mp4.webm" type="video/webm">
                         <source src="https://s3.amazonaws.com/distill-videos/videos/processed/34/BetweenTwoTrees-HD.mp4-mobile.mp4" type="video/mp4">
-
                    </video>
-
                 </div>
             </div>
         </div>
