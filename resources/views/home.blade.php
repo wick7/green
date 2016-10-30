@@ -38,36 +38,21 @@
                     <h1>What We're All About</h1>
                     <h4>We're a platform that connects organizations, voluneteers and local buisnesses to fulfill worthy causes within the community.</h4>
                     <a class="btn btn-default page-scroll about_btn" href="#services"></a>
-                    <div class="present">
-                         <div>
-                             <ul>
-                                <h5>Volunteers</h5>
-                                 <li>Reason 1</li>
-                                 <li>Reason 2</li>
-                                 <li>Reason 3</li>
-                                 <li>Click Here to Learn More</li>
-                             </ul>
-                         </div>
-                         <span style="margin-left: 15em;"></span>
-                         <div style="margin-left: 15em;">       
-                             <ul>
-                                <h5>Organizations</h5>
-                                 <li>Reason 1</li>
-                                 <li>Reason 2</li>
-                                 <li>Reason 3</li>
-                                 <li>Click Here to Learn More</li>
-                             </ul>
-                         </div>
-                         <span style="margin-left: 13em;"></span>
-                         <div class="present_bus" style="margin-left: 15em;">
-                            <ul>
-                                <h5>Businesses</h5>
-                                 <li>Reason 1</li>
-                                 <li>Reason 2</li>
-                                 <li>Reason 3</li>
-                                 <li>Click Here to Learn More</li>
-                             </ul>
-                         </div>
+                    <div class="info_wrapper">
+                        <div class="info_container">
+                            <div id="vol" class="info_sec">
+                              <h5>Volunteers</h5>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                            <div id="org" class="info_sec">
+                              <h5>Organizations</h5>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                            <div id="bus" class="info_sec">
+                              <h5>Businesses</h5>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,7 +63,7 @@
     <section id="services" class="services-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="services_col-lg-12">
                     <h1>Leader Boards</h1>
                     <a class="btn btn-default page-scroll" href="#contact"></a>
                 </div>
