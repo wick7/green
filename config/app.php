@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,8 +39,7 @@ return [
     |
     */
 
-    // 'url' => env('APP_URL', 'http://localhost'),
-    'url' => env('APP_URL', 'n1GXsGJtlEvA9d7iS6+VYp51TYmDVrJStqOSwLlP5xc='), 
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +109,8 @@ return [
     */
 
     'log' => env('APP_LOG', 'single'),
+
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
     |--------------------------------------------------------------------------
